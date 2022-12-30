@@ -10,6 +10,7 @@ function App() {
   return (
     <div className="App">
       <h1>GOAL MASTER</h1>
+      <button>Google Sign In</button>
     </div>
   );
 }
