@@ -1,5 +1,5 @@
-import React from "react";
-import '../Progress/Progress.css'
+import '../Progress/Progress.css';
+import React from "react"
 
 export default function Progress () {
     return (
