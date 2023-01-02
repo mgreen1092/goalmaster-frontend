@@ -12,18 +12,17 @@ export default function Auth () {
     const toggleIndex = () => {
         setIndex((prevState) => !prevState)
     }
-    const { signInWithGoogle, signInWithFacebook, signInWithGitHub} = useUserContext
+    const { signInWithGoogle, signInWithFacebook, signInWithGitHub} = useUserContext()
     return (
         <div className = 'container'>
             {!index ? <SignIn /> : <SignUp />}
-            <div class="separator">
+            <div className="separator">
                 <p>OR</p>
             </div>
             <button className='login-with-google-btn' onClick={signInWithGoogle}>Sign in with Google</button>
-            <button className='login-with-facebook' onClick={(signInWithFacebook)}>Sign in with Facebook</button>
-            <button className='login-with-github' onClick={(signInWithGitHub)}>Sign in with GitHub
+            <button className='login-with-facebook' onClick={signInWithFacebook}>Sign in with Facebook</button>
+            <button className='login-with-github' onClick={signInWithGitHub}>Sign in with GitHub </button>
             {/* <FontAwesomeIcon icon="fa-brands fa-github" /> */}
-            </button>
             <p onClick={toggleIndex}>
                 {!index ? 'New user? Click here' : 'Already have an account?'}
             </p>

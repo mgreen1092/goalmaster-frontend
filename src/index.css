@@ -150,7 +150,7 @@ button {
       0 2px 4px rgba(0, 0, 0, .25),
       0 0 0 3px #c8dafc;
   }
-.login-with-github {
+/* .login-with-github {
     background:#25282d;
     color:white;
     box-shadow:0 15px 30px rgba(#25282d,.36);
@@ -158,4 +158,4 @@ button {
 }
 .login-with-github:hover{
      box-shadow:0 0 0 rgba(#25282d,.0);
-}
+} */

@@ -1,25 +1,25 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import {createUserWithEmailAndPassword, updateProfile, onAuthStateChanged, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, GoogleAuthProvider, FacebookAuthProvider, 
     GithubAuthProvider, signInWithPopup  } from 'firebase/auth'
 import { auth } from '../config/firebase-config.js'
 // import { GoogleAuthProvider, FacebookAuthProvider, 
     // GithubAuthProvider, signInWithPopup } from "firebase/auth";
-import { useState } from 'react';
 
 const UserContext = createContext({})
 
-export const useUserContext = () => useContext(UserContext)
-
-export const UserContextProvider = ({children}) => {
+export const useUserContext = () => {
+    return useContext(UserContext)
+}
+export const UserContextProvider = ({ children }) => {
     const [user, setUser] = useState(null)
-    const [loading, setLoading]= useState()
+    const [loading, setLoading]= useState(false)
     const [error, setError] = useState('')
     
     useState(() => {
         setLoading(true);
-        const unsubscribe = onAuthStateChanged(auth, (res) => {
-          if (res) {
-            setUser(res);
+        const unsubscribe = onAuthStateChanged(auth, (response) => {
+          if (response) {
+            setUser(response);
           } else {
             setUser(null);
           }
@@ -32,9 +32,10 @@ export const UserContextProvider = ({children}) => {
     const registerUser = (email, password, name) => {
         setLoading(true);
         setError('')
-        createUserWithEmailAndPassword(auth, email, password).then(()=> {
-            return updateProfile(auth.currentUser, {
-                displayName: name,
+        createUserWithEmailAndPassword(auth, email, password)
+            .then(()=> {
+                updateProfile(auth.currentUser, {
+                    displayName: name,
             })
         }).then((response) => {
             console.log(response)
@@ -52,7 +53,7 @@ export const UserContextProvider = ({children}) => {
             .then((response) => {
                 console.log(response)
             }).catch((error) => {
-                setError(error.message)
+                setError(error.code)
             }).finally(()=> {
                 setLoading(false)
             })
