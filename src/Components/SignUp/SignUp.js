@@ -1,6 +1,6 @@
 import React from "react";
 import { useRef } from 'react'
-import { useUserContext } from "../../FirebaseContext/userContext";
+import { useUserContext } from "../../FirebaseContext/userContext.js";
 
 export default function SignUp () {
     const emailRef = useRef()

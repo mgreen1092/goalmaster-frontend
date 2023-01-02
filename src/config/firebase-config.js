@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
-import { getAuth, GoogleAuthProvider, FacebookAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore/lite";
 
 const firebaseConfig = {
@@ -17,31 +17,40 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 const storage = getStorage(app);
-const googleProvider=new GoogleAuthProvider()
-const facebookProvider = new FacebookAuthProvider()
+// const googleProvider=new GoogleAuthProvider()
+// const facebookProvider = new FacebookAuthProvider()
+// const gitHubProvider = new GithubAuthProvider()
 
-const signInWithGoogle = () => {
-    signInWithPopup(auth, googleProvider).then((result) => {
-        console.log(result)
-        const name = result.user.displayName
-        const email = result.user.email
-        const profilePic = result.user.photoURL
+// const signInWithGoogle = () => {
+//     signInWithPopup(auth, googleProvider).then((result) => {
+//         console.log(result)
+//         const name = result.user.displayName
+//         const email = result.user.email
+//         const profilePic = result.user.photoURL
 
-        localStorage.setItem('name', name);
-        localStorage.setItem('email', email);
-        localStorage.setItem('profilePic', profilePic)
+//         localStorage.setItem('name', name);
+//         localStorage.setItem('email', email);
+//         localStorage.setItem('profilePic', profilePic)
 
-    }).catch((error) => {
-        console.log(error)
-    });
-}
+//     }).catch((error) => {
+//         console.log(error)
+//     });
+// }
 
-const signInWithFacebook = () => {
-    signInWithPopup(auth, facebookProvider).then((result) => {
-        console.log(result)
-    }).catch((error)=> {
-        console.log(error.message)
-    })
-}
+// const signInWithFacebook = () => {
+//     signInWithPopup(auth, facebookProvider).then((result) => {
+//         console.log(result)
+//     }).catch((error)=> {
+//         console.log(error.message)
+//     })
+// }
 
-export { db, auth, storage, signInWithGoogle, signInWithFacebook };
+// const signInWithGitHub = () => {
+//     signInWithPopup(auth, gitHubProvider).then((result) => {
+//         console.log(result)
+//     }).catch((error)=> {
+//         console.log(error.message)
+//     })
+// }
+
+export { db, auth, storage };

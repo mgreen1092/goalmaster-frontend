@@ -1,8 +1,10 @@
-import { createContext, useContext, useEffect } from "react";
-import {createUserWithEmailAndPassword, updateProfile, onAuthStateChanged, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from 'firebase/auth'
+import { createContext, useContext } from "react";
+import {createUserWithEmailAndPassword, updateProfile, onAuthStateChanged, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, GoogleAuthProvider, FacebookAuthProvider, 
+    GithubAuthProvider, signInWithPopup  } from 'firebase/auth'
 import { auth } from '../config/firebase-config.js'
+// import { GoogleAuthProvider, FacebookAuthProvider, 
+    // GithubAuthProvider, signInWithPopup } from "firebase/auth";
 import { useState } from 'react';
-
 
 const UserContext = createContext({})
 
@@ -12,20 +14,24 @@ export const UserContextProvider = ({children}) => {
     const [user, setUser] = useState(null)
     const [loading, setLoading]= useState()
     const [error, setError] = useState('')
-
-    useEffect(() => {
-        setLoading(true)
-        const unsubscribe = onAuthStateChanged(auth, response => {
-            // if the user is not logged in or not registers, setUser remains at null
-            response ? setUser(response) : setUser(null)
-            setError('')
-            setLoading(false)
-        })
-        return unsubscribe
-    }, [])
+    
+    useState(() => {
+        setLoading(true);
+        const unsubscribe = onAuthStateChanged(auth, (res) => {
+          if (res) {
+            setUser(res);
+          } else {
+            setUser(null);
+          }
+          setError("");
+          setLoading(false);
+        });
+        return unsubscribe;
+      }, []);
 
     const registerUser = (email, password, name) => {
         setLoading(true);
+        setError('')
         createUserWithEmailAndPassword(auth, email, password).then(()=> {
             return updateProfile(auth.currentUser, {
                 displayName: name,
@@ -41,6 +47,7 @@ export const UserContextProvider = ({children}) => {
 
     const signInUser = (email, password) => {
         setLoading(true)
+        setError('')
         signInWithEmailAndPassword(auth, email, password)
             .then((response) => {
                 console.log(response)
@@ -59,14 +66,58 @@ export const UserContextProvider = ({children}) => {
         return sendPasswordResetEmail(auth, email)
     }
 
+    const signInWithGoogle = () => {
+        setLoading(true)
+        setError('')
+        const googleProvider=new GoogleAuthProvider()
+        signInWithPopup(auth, googleProvider)
+        .then((result) => {
+            console.log(result)
+        }).catch((error) => {
+            console.log(error)
+        }).finally(()=> {
+            setLoading(false)
+        });
+    } 
+
+    const signInWithFacebook = () => {
+        setLoading(true)
+        setError('')
+        const facebookProvider = new FacebookAuthProvider()
+        signInWithPopup(auth, facebookProvider).then((result) => {
+            console.log(result)
+        }).catch((error)=> {
+            console.log(error.message)
+        }).finally(()=> {
+            setLoading(false)
+        })
+    }
+
+    const signInWithGitHub = () => {
+        setLoading(true)
+        setError('')
+        const gitHubProvider = new GithubAuthProvider()
+        signInWithPopup(auth, gitHubProvider).then((result) => {
+            console.log(result)
+        }).catch((error)=> {
+            console.log(error.message)
+        }).finally(()=> {
+            setLoading(false)
+        })
+    }
+
+
     const contextValue = {
         user,
-        loading, 
+        loading,
         error,
-        registerUser,
         signInUser,
+        registerUser,
         logoutUser,
-        forgotPassword
+        forgotPassword,
+        signInWithGoogle,
+        signInWithGitHub,
+        signInWithFacebook
     };
     return (
         <div>
