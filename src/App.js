@@ -4,6 +4,7 @@ import './App.css';
 import { useUserContext } from './FirebaseContext/userContext.js';
 import MainPage from './Components/MainPage/MainPage.js';
 import Auth from './Components/Auth/Auth.js';
+import { useNavigate } from 'react-router-dom'
 
 function App() {
   // const [user, setUser] = useState('')
@@ -12,11 +13,12 @@ function App() {
   // const [password, setPassword] = useState('')
   // const [loggingIn, setLoggingIn] = useState('')
   const {loading, error, user} = useUserContext()
+  const navigate = useNavigate()
   return (
     <div className="App">
       <h1>GOAL MASTER</h1>
       {error && <p className='error'>{error}</p>}
-      {loading ? <h2>Loading....</h2> : <>{user ? <MainPage /> : <Auth />}</>}
+      {loading ? <h2>Loading....</h2> : <>{user ? <MainPage navigate={navigate}/> : <Auth />}</>}
     </div>
   );
 }

@@ -15,13 +15,13 @@ export default function Auth () {
     const { signInWithGoogle, signInWithFacebook, signInWithGitHub} = useUserContext()
     return (
         <div className = 'container'>
-            {!index ? <SignIn /> : <SignUp />}
-            <div className="separator">
-                <p>OR</p>
-            </div>
             <button className='login-with-google-btn' onClick={signInWithGoogle}>Sign in with Google</button>
             <button className='login-with-facebook' onClick={signInWithFacebook}>Sign in with Facebook</button>
             <button className='login-with-github' onClick={signInWithGitHub}>Sign in with GitHub </button>
+            <div className="separator">
+                <p>OR</p>
+            </div>
+            {!index ? <SignIn /> : <SignUp />}
             {/* <FontAwesomeIcon icon="fa-brands fa-github" /> */}
             <p onClick={toggleIndex}>
                 {!index ? 'New user? Click here' : 'Already have an account?'}
