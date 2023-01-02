@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, FacebookAuthProvider, signInWithPopup } from "firebase/auth";
 import { getFirestore } from "firebase/firestore/lite";
 
 const firebaseConfig = {
@@ -17,10 +17,11 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth();
 const storage = getStorage(app);
-const provider=new GoogleAuthProvider()
+const googleProvider=new GoogleAuthProvider()
+const facebookProvider = new FacebookAuthProvider()
 
 const signInWithGoogle = () => {
-    signInWithPopup(auth, provider).then((result) => {
+    signInWithPopup(auth, googleProvider).then((result) => {
         console.log(result)
         const name = result.user.displayName
         const email = result.user.email
@@ -35,4 +36,12 @@ const signInWithGoogle = () => {
     });
 }
 
-export { db, auth, storage, signInWithGoogle };
+const signInWithFacebook = () => {
+    signInWithPopup(auth, facebookProvider).then((result) => {
+        console.log(result)
+    }).catch((error)=> {
+        console.log(error.message)
+    })
+}
+
+export { db, auth, storage, signInWithGoogle, signInWithFacebook };
