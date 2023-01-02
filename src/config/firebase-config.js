@@ -1,9 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { getFirestore } from "firebase/firestore/lite";
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: "goalmaster-79ec8.firebaseapp.com",
@@ -13,11 +12,27 @@ const firebaseConfig = {
   appId: "1:697704121639:web:146f06c335f5b8c3fc5502",
 };
 
-// Initialize Firebase
+
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth();
 const storage = getStorage(app);
-//const provider=new GoogleAuthProvider()
+const provider=new GoogleAuthProvider()
 
-export { db, auth, storage };
+const signInWithGoogle = () => {
+    signInWithPopup(auth, provider).then((result) => {
+        console.log(result)
+        const name = result.user.displayName
+        const email = result.user.email
+        const profilePic = result.user.photoURL
+
+        localStorage.setItem('name', name);
+        localStorage.setItem('email', email);
+        localStorage.setItem('profilePic', profilePic)
+
+    }).catch((error) => {
+        console.log(error)
+    });
+}
+
+export { db, auth, storage, signInWithGoogle };

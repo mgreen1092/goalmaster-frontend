@@ -1,4 +1,5 @@
 import './App.css';
+import { signInWithGoogle } from './config/firebase-config.js';
 import {useState} from 'react'
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
   return (
     <div className="App">
       <h1>GOAL MASTER</h1>
-      <button>Google Sign In</button>
+      <button className='login-with-google-btn'onClick={signInWithGoogle}>Google Sign In</button>
     </div>
   );
 }
