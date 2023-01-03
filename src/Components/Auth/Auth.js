@@ -18,14 +18,14 @@ export default function Auth () {
             <button className='login-with-google-btn' onClick={signInWithGoogle}>Sign in with Google</button>
             <button className='login-with-facebook' onClick={signInWithFacebook}>Sign in with Facebook</button>
             <button className='login-with-github' onClick={signInWithGitHub}>Sign in with GitHub </button>
-            <div className="separator">
+            {/* <div className="separator">
                 <p>OR</p>
             </div>
-            {!index ? <SignIn /> : <SignUp />}
+            {!index ? <SignIn /> : <SignUp />} */}
             {/* <FontAwesomeIcon icon="fa-brands fa-github" /> */}
-            <p onClick={toggleIndex}>
+            {/* <p onClick={toggleIndex}>
                 {!index ? 'New user? Click here' : 'Already have an account?'}
-            </p>
+            </p> */}
         </div>
     )
 }

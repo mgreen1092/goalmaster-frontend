@@ -15,20 +15,23 @@ export const UserContextProvider = ({ children }) => {
     const [loading, setLoading]= useState(false)
     const [error, setError] = useState('')
     
-    useState(() => {
+
+    useState( () => {
         setLoading(true);
         const unsubscribe = onAuthStateChanged(auth, (response) => {
-          if (response) {
-            // setUser(response)
-            let userData
-            if (userData === axios.get(`https://goalmaster.herokuapp.com/api/users/${response.email}`)) {
-                setUser(response)
-            } else if (userData === axios.post('https://goalmaster.herokuapp.com/api/users/', {
-                email: userData.email,
-                goals:[]
-            })) {
-                setUser(response)
-            }
+            console.log(auth, 'AUTH')
+            if (response) {
+            setUser(response)
+            console.log(response)
+            // let userData
+            // if (userData === axios.get(`https://goalmaster.herokuapp.com/api/users/${response.email}`)) {
+            //     setUser(response)
+            // } else if (user === axios.post('https://goalmaster.herokuapp.com/api/users/', {
+            //     email: user.email,
+            //     goals:[]
+            // })) {
+            //     setUser(response)
+            // }
           } else {
             setUser(null);
           }
@@ -69,7 +72,11 @@ export const UserContextProvider = ({ children }) => {
     }
 
     const logoutUser = () => {
-        signOut(auth)
+        signOut(auth).then(() => {
+            console.log('SIGN OUT SUCCESS')
+        }).catch((error) => {
+            console.log(error)
+        })
     }
 
     const forgotPassword = (email) => {

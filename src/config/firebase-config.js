@@ -2,7 +2,8 @@ import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore/lite";
-
+import { GoogleAuthProvider, FacebookAuthProvider, 
+    GithubAuthProvider, signInWithPopup  } from 'firebase/auth'
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: "goalmaster-79ec8.firebaseapp.com",
@@ -18,8 +19,8 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 const storage = getStorage(app);
 // const googleProvider=new GoogleAuthProvider()
-// const facebookProvider = new FacebookAuthProvider()
-// const gitHubProvider = new GithubAuthProvider()
+const facebookProvider = new FacebookAuthProvider()
+const gitHubProvider = new GithubAuthProvider()
 
 // const signInWithGoogle = () => {
 //     signInWithPopup(auth, googleProvider).then((result) => {
