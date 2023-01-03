@@ -5,7 +5,7 @@ import { getAuth, signOut, onAuthStateChanged, GoogleAuthProvider, FacebookAuthP
 
 function App() {
   // const [goals, setGoals] = useState()
-  const [userAuth, setUserAuth] = useState(false)
+  const [userAuth, setUserAuth] = useState(false || window.localStorage.getItem('auth')==='true')
   const [token, setToken] = useState('')
   const googleProvider=new GoogleAuthProvider()
   const facebookProvider = new FacebookAuthProvider()
@@ -17,6 +17,7 @@ function App() {
       console.log(response, 'RESPONSE')
       if (response) {
         setUserAuth(true)
+        window.localStorage.setItem('auth', 'true')
         response.getIdToken().then((token) => {
           console.log(token, 'TOKEN')
           setToken(token)
@@ -30,6 +31,7 @@ function App() {
         console.log(result)
         if (result) {
           setUserAuth(true)
+          window.localStorage.setItem('auth', 'true')
         }
         const name = result.user.displayName
         const email = result.user.email
@@ -48,6 +50,7 @@ function App() {
         console.log(result)
         if (result) {
           setUserAuth(true)
+          window.localStorage.setItem('auth', 'true')
         }
     }).catch((error)=> {
         console.log(error.message)
@@ -59,6 +62,7 @@ function App() {
         console.log(result)
         if (result) {
           setUserAuth(true)
+          window.localStorage.setItem('auth', 'true')
         }
     }).catch((error)=> {
         console.log(error.message)
@@ -79,7 +83,7 @@ function App() {
     <div className="App">
       <h1>GOAL MASTER</h1>
       {userAuth ? (
-        <MainPage logoutUser={logoutUser}/>
+        <MainPage logoutUser={logoutUser} token={token}/>
       ) : ( 
       <div className = 'container'>
         <button className='login-with-google-btn' onClick={signInWithGoogle}>Sign in with Google</button>
