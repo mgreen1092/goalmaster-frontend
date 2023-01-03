@@ -19,10 +19,11 @@ export const UserContextProvider = ({ children }) => {
         setLoading(true);
         const unsubscribe = onAuthStateChanged(auth, (response) => {
           if (response) {
+            // setUser(response)
             let userData
             if (axios.get(`https://goalmaster.herokuapp.com/api/users/${email}`)) {
-                setUser(userData.data)
-            } else if (userData = axios.post('https://goalmaster.herokuapp.com/api/users/', {
+                setUser(response)
+            } else if (axios.post('https://goalmaster.herokuapp.com/api/users/', {
                 email: email,
                 goals:[]
 
