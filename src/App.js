@@ -1,9 +1,5 @@
 import './App.css';
-// import { signInWithGoogle, signInWithFacebook } from './config/firebase-config.js';
-// import {useState} from 'react'
-// import { useUserContext } from './FirebaseContext/userContext.js';
 import MainPage from './Components/MainPage/MainPage.js';
-// import Auth from './Components/Auth/Auth.js';
 import { useEffect, useState } from 'react'
 import { getAuth, signOut, onAuthStateChanged, GoogleAuthProvider, FacebookAuthProvider, GithubAuthProvider, signInWithPopup  } from 'firebase/auth'
 
