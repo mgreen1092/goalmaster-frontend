@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from "react";
 import {createUserWithEmailAndPassword, updateProfile, onAuthStateChanged, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, GoogleAuthProvider, FacebookAuthProvider, 
     GithubAuthProvider, signInWithPopup  } from 'firebase/auth'
 import { auth } from '../config/firebase-config.js'
-// import axios from 'axios'
+import axios from 'axios'
 
 
 const UserContext = createContext({})
@@ -19,16 +19,16 @@ export const UserContextProvider = ({ children }) => {
         setLoading(true);
         const unsubscribe = onAuthStateChanged(auth, (response) => {
           if (response) {
-            setUser(response)
-            // if (axios.get(`https://goalmaster.herokuapp.com/api/users/${email}`)) {
-            //     setUser(response)
-            // } else if (axios.post('https://goalmaster.herokuapp.com/api/users/', {
-            //     email: '',
-            //     goals:[]
-
-            // })) {
-            //     setUser(response)
-            // }
+            // setUser(response)
+            let userData
+            if (userData === axios.get(`https://goalmaster.herokuapp.com/api/users/${response.email}`)) {
+                setUser(response)
+            } else if (userData === axios.post('https://goalmaster.herokuapp.com/api/users/', {
+                email: userData.email,
+                goals:[]
+            })) {
+                setUser(response)
+            }
           } else {
             setUser(null);
           }
