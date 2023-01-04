@@ -7,6 +7,7 @@ import { Route, Routes } from 'react-router'
 
 function App() {
   const [userAuth, setUserAuth] = useState(false || window.localStorage.getItem('auth')==='true')
+  const [user, setUser] = useState()
   const [token, setToken] = useState('')
   const googleProvider=new GoogleAuthProvider()
   const facebookProvider = new FacebookAuthProvider()
@@ -17,6 +18,7 @@ function App() {
     onAuthStateChanged(auth, (response) => {
       console.log(response, 'RESPONSE')
       if (response) {
+        // console.log(auth.currentUser, 'CURRENT USER')
         setUserAuth(true)
         window.localStorage.setItem('auth', 'true')
         response.getIdToken().then((token) => {
@@ -29,7 +31,9 @@ function App() {
 
   const signInWithGoogle = () => {
     signInWithPopup(auth, googleProvider).then((result) => {
-        console.log(result)
+        console.log(result, '+++++++++++')
+        console.log(auth.currentUser, 'CURRENT USER')
+        // setUser(result)
         if (result) {
           setUserAuth(true)
           window.localStorage.setItem('auth', 'true')
@@ -57,7 +61,6 @@ function App() {
         console.log(error.message)
     })
   }
-
   const signInWithGitHub = () => {
     signInWithPopup(auth, gitHubProvider).then((result) => {
         console.log(result)
@@ -77,7 +80,6 @@ function App() {
         console.log(error)
     })
 }
-
   return (
     <div className="App">
       <h1>GOAL MASTER</h1>

@@ -1,0 +1,19 @@
+.goal-goal {
+    border: 2px solid black;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 25px;
+}
+.goal-goal:hover { 
+    transform: scale(1.2, 1.1); 
+}
+a:link{
+    color: black;
+    text-decoration: none;
+}
+a:hover{
+    font-weight: bold;
+}
+a:visited{
+    color: black;
+}

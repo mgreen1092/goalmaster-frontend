@@ -10,11 +10,11 @@ export default function MainPage ({logoutUser, token}) {
         <div>
             <div>
                 <h2>Welcome</h2>
-                <button onClick={logoutUser}>Logout</button>
             </div>
             <div className='goals'>
                 <Goals token={token} goals={goals} setGoals={setGoals}/>
-			</div>
+                <button onClick={logoutUser}>Logout</button>
+            </div>
 		</div>
     )
 }

@@ -4,6 +4,8 @@ import axios from 'axios'
 import { useState } from 'react'
 import AddGoal from '../AddGoal/AddGoal.js'
 import { Link } from 'react-router-dom'
+import '../Goals/Goals.css'
+import { TbPencil } from 'react-icons/tb'
 
 export default function Goals ({goals, setGoals, token}) {
     const [addGoalModal, setAddGoalModal] = useState(false)
@@ -38,14 +40,15 @@ export default function Goals ({goals, setGoals, token}) {
     //     // setUser(updatedUser.data)
     //     }
     return (
-        <div className='goal-list'>
-            <div>
+        <div >
+            <div className='goal-list'>
                 {goals?.map((goal, index) => 
                 <div key={index} className='goal-goal'>
                     <Link to={'goals/' + goal._id}>{goal.goal}</Link>
-                    <p>{goal.description}</p>
-                    <p>{goal.goalvalue}</p>
-                    <p>{goal.occurence}</p>
+                    <p>Description: {goal.description}</p>
+                    <p>Value: {goal.goalvalue}{goal.time}</p>
+                    <p>To be completed: {goal.occurence}</p>
+                    <TbPencil style={{ fontSize: '1em', color: '#1BD760' }} className='goal-edit-button' />
                 </div>)}
             </div>
             <button onClick={() => setAddGoalModal(true)}>New Goal</button>
