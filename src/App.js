@@ -17,15 +17,10 @@ function App() {
   const gitHubProvider = new GithubAuthProvider()
   const auth = getAuth();
 
-  // const handleLogin = (action) => {
-  //   setLoggingIn(action)
-  // }
-
   useEffect(() => {
     onAuthStateChanged(auth, (response) => {
       console.log(response, 'RESPONSE')
       if (response) {
-        // console.log(auth.currentUser, 'CURRENT USER')
         setUserAuth(true)
         window.localStorage.setItem('auth', 'true')
         response.getIdToken().then((token) => {
@@ -39,11 +34,6 @@ function App() {
   const signInWithGoogle = () => {
     signInWithPopup(auth, googleProvider).then((result) => {
         console.log(result, '+++++++++++')
-        // console.log(auth.currentUser, 'CURRENT USER')
-        // setUser(result)
-        // if (result.user) {
-          // setUserAuth(true)
-          // window.localStorage.setItem('auth', 'true')
           sessionStorage.setItem('Auth Token', result._tokenResponse.refreshToken)
           sessionStorage.setItem('ID Token', result._tokenResponse.idToken)
           const header = { headers: { authorization: `bearer ${sessionStorage.getItem('ID Token')}`,
@@ -133,7 +123,7 @@ console.log(user, '-------------------')
     <Routes>
       <Route path='goals/:id' element={<GoalDetails />} />
       <Route path='/home' element={<MainPage />} />
-      <Route path='/addGoal' element={<AddGoal />} />
+      {/* <Route path='/addGoal' element={<AddGoal />} /> */}
     </Routes>
     </div>
     // </div>

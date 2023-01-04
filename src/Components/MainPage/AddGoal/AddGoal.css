@@ -1,0 +1,61 @@
+.add-goal {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.add-goal-form {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    padding: 2em 7em;
+    gap: 0.5em;
+    align-content: center;
+    text-align: center;
+    background-color: #2B3035;
+    border-radius: 10px;
+}
+
+.add-goal-form>input,
+select {
+    height: 2em;
+    border-radius: 5px;
+    padding: 5px;
+    border: none;
+    margin: none;
+}
+
+.add-goal-form>p,
+small {
+    margin: 0;
+    text-align: left;
+}
+
+select {
+    height: 2.5em;
+}
+
+.add-to-goal-button {
+    width: 30%;
+    font-family: spotify, sans-serif;
+    align-self: center;
+    background-color: teal;
+    border-radius: 20px;
+    border: none;
+    padding: 1em;
+    margin-top: 1em;
+    cursor: pointer;
+}
+
+.add {
+    color: teal;
+    font-size: 20px;
+}

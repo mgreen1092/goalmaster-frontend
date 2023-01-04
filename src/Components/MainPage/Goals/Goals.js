@@ -54,7 +54,7 @@ export default function Goals ({goals, setGoals, user, token}) {
                     <TbPencil style={{ fontSize: '1em', color: 'black' }} className='goal-edit-button' />
                 </div>)}
             </div>
-            <Link to='/addGoal'><button onClick={() => setAddGoalModal(true)}>New Goal</button></Link>
+            <button onClick={() => setAddGoalModal(true)}>New Goal</button>
             <AddGoal addGoalModal={addGoalModal} setAddGoalModal={setAddGoalModal} token={token}/>
         </div>
         

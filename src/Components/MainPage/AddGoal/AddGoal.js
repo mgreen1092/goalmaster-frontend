@@ -2,6 +2,7 @@ import React from "react";
 import '../AddGoal/AddGoal.css'
 import { useState } from 'react'
 import axios from 'axios'
+import { IoIosCloseCircle } from 'react-icons/io'
 
 export default function AddGoal ({addGoalModal, setAddGoalModal, token}) {
     const [addGoal, setAddGoal] = useState(
@@ -12,11 +13,12 @@ export default function AddGoal ({addGoalModal, setAddGoalModal, token}) {
             occurence: '',
         }
     )
-    // const [allGoals, setAllGoals] = useState([])
     const handleChange = (e) => {
         const addedGoal = { ...addGoal }
+        addedGoal[e.target.name] = e.target.value
+        setAddGoal(addedGoal)
     }
-    const addGoals = async (e) => {
+    const addGoalToUser = async (e) => {
         e.preventDefault()
         try {
             const goalToAdd = axios.post('https://goalmaster.herokuapp.com/api/goals', 
@@ -43,18 +45,18 @@ export default function AddGoal ({addGoalModal, setAddGoalModal, token}) {
     }
     return (
         <div>
-            {/* <div className='add-song' style={{ display: addSongModal ? 'flex' : 'none' }} >
-                <form className='add-song-form' style={{ position: 'relative' }} >
-                    <IoIosCloseCircle style={{ color: '#1BD760', fontSize: '2em', position: 'absolute', right: '1em', cursor: 'pointer' }} onClick={() => setAddSongModal(false)} />
+            <div className='add-goal' style={{ display: addGoalModal ? 'flex' : 'none' }} >
+                <form className='add-goal-form' style={{ position: 'relative' }} >
+                    <IoIosCloseCircle style={{ color: 'teal', fontSize: '2em', position: 'absolute', right: '1em', cursor: 'pointer' }} onClick={() => setAddGoalModal(false)} />
                     <h1>Add a New Goal</h1>
                     <p>Goal</p>
-                    <input className='name-input' placeholder='Song Title' name='name' value={addSong.name} onChange={handleChange}></input>
+                    <input className='name-input' placeholder='Goal' name='name' value={addGoal.goal} onChange={handleChange}></input>
                     <p>Goal Description</p>
-                    <input className='artist-input' placeholder='Artist' name='artist' value={addSong.artist} onChange={handleChange}></input>
+                    <input className='artist-input' placeholder='Description' name='artist' value={addGoal.description} onChange={handleChange}></input>
                     <p>Quantify Your Goal</p>
-                    <input className='album-input' placeholder='Album Title' name='album' value={addSong.album} onChange={handleChange}></input>
-                    <p>occurence</p>
-                    <select name='playlistSelect' onChange={handleChange}>
+                    <input className='album-input' placeholder='Number' name='album' value={addGoal.goalvalue} onChange={handleChange}></input>
+                    <p>How often will you complete this goal?</p>
+                    <select name='occurenceSelect' onChange={handleChange}>
                         <option value='0'>Daily</option>
                         <option value='1'>Weekly</option>
                         <option value='2'>Monthly</option>
@@ -62,8 +64,8 @@ export default function AddGoal ({addGoalModal, setAddGoalModal, token}) {
                         <option value='4'>Biannually</option>
                         <option value='5'>Yearly</option>
                     </select>
-                    <button className='add-to-playlist-button' onClick={addSongToPlaylist} >Add Goal</button>
+                    <button className='add-to-goals-button' onClick={addGoalToUser} >Add Goal</button>
                 </form>
-        </div> */}
+        </div>
         </div>
     )}
