@@ -24,14 +24,6 @@ export default function Goals ({goals, setGoals, user, token}) {
                 'Authorization': 'Bearer ' + token
             }
         })
-        // userGoals.body.length < 1 ? userGoals = axios.post('https://goalmaster.herokuapp.com/api/users/', {
-        //         email: user,
-        //         goals: []
-        //       }, {
-        //         headers: {
-        //             'Authorization': 'Bearer ' + token
-        //         }})
-        // : 
         console.log(userGoals.data.goals)
         setGoals(userGoals.data.goals)
     }

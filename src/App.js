@@ -11,10 +11,15 @@ function App() {
   const [userAuth, setUserAuth] = useState(false || window.localStorage.getItem('auth')==='true')
   const [user, setUser] = useState()
   const [token, setToken] = useState('')
+  // const [loggingIn, setLoggingIn] = useState('')
   const googleProvider=new GoogleAuthProvider()
   const facebookProvider = new FacebookAuthProvider()
   const gitHubProvider = new GithubAuthProvider()
   const auth = getAuth();
+
+  // const handleLogin = (action) => {
+  //   setLoggingIn(action)
+  // }
 
   useEffect(() => {
     onAuthStateChanged(auth, (response) => {
@@ -36,37 +41,33 @@ function App() {
         console.log(result, '+++++++++++')
         // console.log(auth.currentUser, 'CURRENT USER')
         // setUser(result)
-        if (result) {
-          setUserAuth(true)
-          window.localStorage.setItem('auth', 'true')
-        //   let userData
-        //   userAuth===true
-        //   ? userData = axios.get(`https://goalmaster.herokuapp.com/api/users/${user}`, {
-        //     headers: {
-        //         'Authorization': 'Bearer ' + token
-        //     }})
-        //   : userData = axios.post('https://goalmaster.herokuapp.com/api/users/', {
-        //     email: email,
-        //     goals: []
-        //   }, {
-        //     headers: {
-        //         'Authorization': 'Bearer ' + token
-        //     }})
-
-        }
-        let userData
-        userAuth
-        ? userData = axios.get(`https://goalmaster.herokuapp.com/api/users/${user}`, {
-          headers: {
-              'Authorization': 'Bearer ' + token
-          }})
-        : userData = axios.post('https://goalmaster.herokuapp.com/api/users/', {
-          email: email,
-          goals: []
-        }, {
-          headers: {
-              'Authorization': 'Bearer ' + token
-          }})
+        // if (result.user) {
+          // setUserAuth(true)
+          // window.localStorage.setItem('auth', 'true')
+          sessionStorage.setItem('Auth Token', result._tokenResponse.refreshToken)
+          sessionStorage.setItem('ID Token', result._tokenResponse.idToken)
+          const header = { headers: { authorization: `bearer ${sessionStorage.getItem('ID Token')}`,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'} }
+          fetch(`https://goalmaster.herokuapp.com/api/users/${result.user.email}`, header)
+          .then((response) => {
+            console.log(response)
+            if (!response.ok) {
+              fetch('https://goalmaster.herokuapp.com/api/users/', {
+                headers: { 'authorization': `bearer ${sessionStorage.getItem('ID Token')}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'},
+              method: "POST",
+              body: JSON.stringify({
+                email: result.user.email,
+                goals: []
+          })}).then((response) => {
+            console.log(response)
+          })
+            }
+          }).catch((err) => {
+          console.log(err)
+          })
         const name = result.user.displayName
         const email = result.user.email
         console.log(email)
