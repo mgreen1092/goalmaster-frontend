@@ -32,7 +32,7 @@ function App() {
   const signInWithGoogle = () => {
     signInWithPopup(auth, googleProvider).then((result) => {
         console.log(result, '+++++++++++')
-        console.log(auth.currentUser, 'CURRENT USER')
+        // console.log(auth.currentUser, 'CURRENT USER')
         // setUser(result)
         if (result) {
           setUserAuth(true)
@@ -40,6 +40,7 @@ function App() {
         }
         const name = result.user.displayName
         const email = result.user.email
+        setUser(email)
         const profilePic = result.user.photoURL
 
         localStorage.setItem('name', name);
@@ -84,7 +85,7 @@ function App() {
     <div className="App">
       <h1>GOAL MASTER</h1>
       {userAuth ? (
-        <MainPage logoutUser={logoutUser} token={token}/>
+        <MainPage logoutUser={logoutUser} user={user} token={token}/>
       ) : ( 
       <div className = 'container'>
         <button className='login-with-google-btn' onClick={signInWithGoogle}>Sign in with Google</button>

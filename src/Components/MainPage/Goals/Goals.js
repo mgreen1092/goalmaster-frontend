@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 import '../Goals/Goals.css'
 import { TbPencil } from 'react-icons/tb'
 
-export default function Goals ({goals, setGoals, token}) {
+export default function Goals ({goals, setGoals, user, token}) {
     const [addGoalModal, setAddGoalModal] = useState(false)
     useEffect(() => {
         if(token) {
@@ -16,12 +16,12 @@ export default function Goals ({goals, setGoals, token}) {
     }, [token])
     const getGoals = async (token) => {
         console.log(token, 'GOAL TOKEN')
-        const userGoals = await axios.get('https://goalmaster.herokuapp.com/api/goals/', {
+        const userGoals = await axios.get(`https://goalmaster.herokuapp.com/api/users/${user}`, {
             headers: {
                 'Authorization': 'Bearer ' + token
             }
         })
-        console.log(userGoals.data)
+        console.log(userGoals)
         setGoals(userGoals.data)
     }
     console.log(goals)
