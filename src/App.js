@@ -40,6 +40,7 @@ function App() {
         }
         const name = result.user.displayName
         const email = result.user.email
+        console.log(email)
         setUser(email)
         const profilePic = result.user.photoURL
 
@@ -81,6 +82,7 @@ function App() {
         console.log(error)
     })
 }
+console.log(user, '-------------------')
   return (
     <div className="App">
       <h1>GOAL MASTER</h1>
