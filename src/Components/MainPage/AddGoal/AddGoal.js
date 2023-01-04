@@ -1,8 +1,9 @@
 import React from "react";
 import '../AddGoal/AddGoal.css'
 import { useState } from 'react'
+import axios from 'axios'
 
-export default function AddGoal () {
+export default function AddGoal ({addGoalModal, setAddGoalModal, token}) {
     const [addGoal, setAddGoal] = useState(
         {
             goal: '',
@@ -12,11 +13,33 @@ export default function AddGoal () {
         }
     )
     // const [allGoals, setAllGoals] = useState([])
+    const handleChange = (e) => {
+        const addedGoal = { ...addGoal }
+    }
     const addGoals = async (e) => {
         e.preventDefault()
-        // try {
-            // const goalToAdd = //axios post request
-        // }
+        try {
+            const goalToAdd = axios.post('https://goalmaster.herokuapp.com/api/goals', 
+                {
+                    goal: '',
+                    description: '',
+                    goalvalue: '',
+                    occurence: '',
+                }, {
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    }
+                })
+        }catch (err) {
+            console.log(err);
+          }
+          setAddGoal({
+            goal: '',
+            description: '',
+            goalvalue: '',
+            occurence: '',
+          })
+          setAddGoalModal(false)
     }
     return (
         <div>

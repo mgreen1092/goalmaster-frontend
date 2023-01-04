@@ -5,6 +5,7 @@ import { getAuth, signOut, onAuthStateChanged, GoogleAuthProvider, FacebookAuthP
 import GoalDetails from './Components/MainPage/GoalDetails.js';
 import { Route, Routes } from 'react-router'
 import axios from 'axios'
+import AddGoal from './Components/MainPage/AddGoal/AddGoal';
 
 function App() {
   const [userAuth, setUserAuth] = useState(false || window.localStorage.getItem('auth')==='true')
@@ -38,13 +39,8 @@ function App() {
         if (result) {
           setUserAuth(true)
           window.localStorage.setItem('auth', 'true')
-        }
-        const name = result.user.displayName
-        const email = result.user.email
-        console.log(email)
-        setUser(email)
-        // let userData
-        // userAuth===true
+        //   let userData
+        //   userAuth===true
         //   ? userData = axios.get(`https://goalmaster.herokuapp.com/api/users/${user}`, {
         //     headers: {
         //         'Authorization': 'Bearer ' + token
@@ -56,6 +52,26 @@ function App() {
         //     headers: {
         //         'Authorization': 'Bearer ' + token
         //     }})
+
+        }
+        let userData
+        userAuth
+        ? userData = axios.get(`https://goalmaster.herokuapp.com/api/users/${user}`, {
+          headers: {
+              'Authorization': 'Bearer ' + token
+          }})
+        : userData = axios.post('https://goalmaster.herokuapp.com/api/users/', {
+          email: email,
+          goals: []
+        }, {
+          headers: {
+              'Authorization': 'Bearer ' + token
+          }})
+        const name = result.user.displayName
+        const email = result.user.email
+        console.log(email)
+        setUser(email)
+        // let userData
         const profilePic = result.user.photoURL
 
         localStorage.setItem('name', name);
@@ -99,21 +115,27 @@ function App() {
 }
 console.log(user, '-------------------')
   return (
-    <div className="App">
-      <h1>GOAL MASTER</h1>
+    <div className="Nav">
+      {/* <h1 className='title'>GOAL MASTER</h1> */}
       {userAuth ? (
         <MainPage logoutUser={logoutUser} user={user} token={token}/>
       ) : ( 
+      <div className="App">
+        <h1 className='title'>GOAL MASTER</h1>
       <div className = 'container'>
         <button className='login-with-google-btn' onClick={signInWithGoogle}>Sign in with Google</button>
         <button className='login-with-facebook' onClick={signInWithFacebook}>Sign in with Facebook</button>
         <button className='login-with-github' onClick={signInWithGitHub}>Sign in with GitHub </button>
     </div>
+    </div>
     )}
     <Routes>
       <Route path='goals/:id' element={<GoalDetails />} />
+      <Route path='/home' element={<MainPage />} />
+      <Route path='/addGoal' element={<AddGoal />} />
     </Routes>
     </div>
+    // </div>
   );
 }
 

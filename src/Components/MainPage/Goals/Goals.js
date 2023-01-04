@@ -24,14 +24,15 @@ export default function Goals ({goals, setGoals, user, token}) {
                 'Authorization': 'Bearer ' + token
             }
         })
-        userGoals.body.length < 1 ? userGoals = axios.post('https://goalmaster.herokuapp.com/api/users/', {
-                email: user,
-                goals: []
-              }, {
-                headers: {
-                    'Authorization': 'Bearer ' + token
-                }})
-        : console.log(userGoals.data.goals)
+        // userGoals.body.length < 1 ? userGoals = axios.post('https://goalmaster.herokuapp.com/api/users/', {
+        //         email: user,
+        //         goals: []
+        //       }, {
+        //         headers: {
+        //             'Authorization': 'Bearer ' + token
+        //         }})
+        // : 
+        console.log(userGoals.data.goals)
         setGoals(userGoals.data.goals)
     }
     // console.log(goals)
@@ -61,8 +62,8 @@ export default function Goals ({goals, setGoals, user, token}) {
                     <TbPencil style={{ fontSize: '1em', color: 'black' }} className='goal-edit-button' />
                 </div>)}
             </div>
-            <button onClick={() => setAddGoalModal(true)}>New Goal</button>
-            <AddGoal addGoalModal={addGoalModal} setAddGoalModal={setAddGoalModal}/>
+            <Link to='/addGoal'><button onClick={() => setAddGoalModal(true)}>New Goal</button></Link>
+            <AddGoal addGoalModal={addGoalModal} setAddGoalModal={setAddGoalModal} token={token}/>
         </div>
         
     )
