@@ -14,15 +14,25 @@ export default function Goals ({goals, setGoals, user, token}) {
             getGoals(token)
         }
     }, [token])
+    const url='https://goalmaster.herokuapp.com'
     const getGoals = async (token) => {
         console.log(token, 'GOAL TOKEN')
-        const userGoals = await axios.get(`https://goalmaster.herokuapp.com/users/${user}`, {
+        const urlPath = `${url}/users/${user}`
+        console.log(urlPath)
+        let userGoals = await axios.get(`${url}/api/users/${user}`, {
             headers: {
                 'Authorization': 'Bearer ' + token
             }
         })
-        console.log(userGoals)
-        // setGoals(userGoals.data)
+        userGoals.body.length < 1 ? userGoals = axios.post('https://goalmaster.herokuapp.com/api/users/', {
+                email: user,
+                goals: []
+              }, {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }})
+        : console.log(userGoals.data.goals)
+        setGoals(userGoals.data.goals)
     }
     // console.log(goals)
     // const handleAddGoals = async () => {

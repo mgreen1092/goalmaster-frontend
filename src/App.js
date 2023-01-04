@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { getAuth, signOut, onAuthStateChanged, GoogleAuthProvider, FacebookAuthProvider, GithubAuthProvider, signInWithPopup  } from 'firebase/auth'
 import GoalDetails from './Components/MainPage/GoalDetails.js';
 import { Route, Routes } from 'react-router'
+import axios from 'axios'
 
 function App() {
   const [userAuth, setUserAuth] = useState(false || window.localStorage.getItem('auth')==='true')
@@ -42,6 +43,19 @@ function App() {
         const email = result.user.email
         console.log(email)
         setUser(email)
+        // let userData
+        // userAuth===true
+        //   ? userData = axios.get(`https://goalmaster.herokuapp.com/api/users/${user}`, {
+        //     headers: {
+        //         'Authorization': 'Bearer ' + token
+        //     }})
+        //   : userData = axios.post('https://goalmaster.herokuapp.com/api/users/', {
+        //     email: email,
+        //     goals: []
+        //   }, {
+        //     headers: {
+        //         'Authorization': 'Bearer ' + token
+        //     }})
         const profilePic = result.user.photoURL
 
         localStorage.setItem('name', name);
@@ -78,6 +92,7 @@ function App() {
     signOut(auth).then(() => {
         console.log('SIGN OUT SUCCESS')
         setUserAuth(false)
+        setUser('')
     }).catch((error) => {
         console.log(error)
     })

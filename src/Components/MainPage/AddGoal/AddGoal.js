@@ -1,7 +1,23 @@
 import React from "react";
 import '../AddGoal/AddGoal.css'
+import { useState } from 'react'
 
 export default function AddGoal () {
+    const [addGoal, setAddGoal] = useState(
+        {
+            goal: '',
+            description: '',
+            goalvalue: '',
+            occurence: '',
+        }
+    )
+    // const [allGoals, setAllGoals] = useState([])
+    const addGoals = async (e) => {
+        e.preventDefault()
+        // try {
+            // const goalToAdd = //axios post request
+        // }
+    }
     return (
         <div>
             {/* <div className='add-song' style={{ display: addSongModal ? 'flex' : 'none' }} >
