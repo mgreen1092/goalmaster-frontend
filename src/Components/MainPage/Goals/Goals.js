@@ -22,9 +22,9 @@ export default function Goals ({goals, setGoals, user, token}) {
             }
         })
         console.log(userGoals)
-        setGoals(userGoals.data)
+        // setGoals(userGoals.data)
     }
-    console.log(goals)
+    // console.log(goals)
     // const handleAddGoals = async () => {
     //     const newGoal = await axios.post('https://goalmaster.herokuapp.com/api/goals', {
     //         goal: 'My new goal:',
@@ -48,11 +48,11 @@ export default function Goals ({goals, setGoals, user, token}) {
                     <p>Description: {goal.description}</p>
                     <p>Value: {goal.goalvalue}{goal.time}</p>
                     <p>To be completed: {goal.occurence}</p>
-                    <TbPencil style={{ fontSize: '1em', color: '#1BD760' }} className='goal-edit-button' />
+                    <TbPencil style={{ fontSize: '1em', color: 'black' }} className='goal-edit-button' />
                 </div>)}
             </div>
             <button onClick={() => setAddGoalModal(true)}>New Goal</button>
-            <AddGoal addGoalModal={addGoalModal} />
+            <AddGoal addGoalModal={addGoalModal} setAddGoalModal={setAddGoalModal}/>
         </div>
         
     )
