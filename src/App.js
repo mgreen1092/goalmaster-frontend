@@ -2,9 +2,10 @@ import './App.css';
 import MainPage from './Components/MainPage/MainPage.js';
 import { useEffect, useState } from 'react'
 import { getAuth, signOut, onAuthStateChanged, GoogleAuthProvider, FacebookAuthProvider, GithubAuthProvider, signInWithPopup  } from 'firebase/auth'
+import GoalDetails from './Components/MainPage/GoalDetails.js';
+import { Route, Routes } from 'react-router'
 
 function App() {
-  // const [goals, setGoals] = useState()
   const [userAuth, setUserAuth] = useState(false || window.localStorage.getItem('auth')==='true')
   const [token, setToken] = useState('')
   const googleProvider=new GoogleAuthProvider()
@@ -77,8 +78,6 @@ function App() {
     })
 }
 
-
-  // const {loading, error, user} = useUserContext()
   return (
     <div className="App">
       <h1>GOAL MASTER</h1>
@@ -89,10 +88,11 @@ function App() {
         <button className='login-with-google-btn' onClick={signInWithGoogle}>Sign in with Google</button>
         <button className='login-with-facebook' onClick={signInWithFacebook}>Sign in with Facebook</button>
         <button className='login-with-github' onClick={signInWithGitHub}>Sign in with GitHub </button>
-      {/* {error && <p className='error'>{error}</p>}
-      {loading ? <h2>Loading....</h2> : <>{user ? <MainPage goals={goals} setGoals={setGoals}/>} */}
     </div>
     )}
+    <Routes>
+      <Route path='goals/:id' element={<GoalDetails />} />
+    </Routes>
     </div>
   );
 }
