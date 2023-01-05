@@ -86,12 +86,26 @@ export default function Goals ({goals, setGoals, user, setUser, token}) {
     }
     const editGoal = async (goalId) => {
         console.log(goalId)
-        await axios.put(`https://goalmaster.herokuapp.com/api/goals/${goalId}`, {
-            headers: {
-                'Authorization': 'Bearer ' + token
-            }})
+        fetch(`https://goalmaster.herokuapp.com/api/goals/${goalId}`, {
+                headers: { 'authorization': `bearer ${sessionStorage.getItem('ID Token')}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'},
+              method: "PUT",
+              body: JSON.stringify({
+                goal: 'React PUT Request Example',
+                description: '',
+                goalvalue: '',
+                occurence: ''
+          })}).then((response) => {
+            console.log(response)
+          })
+        // await axios.put(`https://goalmaster.herokuapp.com/api/goals/${goalId}`, {
+        //     headers: {
+        //         'Authorization': 'Bearer ' + token
+        //     }})
         setEditGoalModal(false)
         getGoals(token)
+        console.log('AXIOS CALL')
     }
     const handleEdit = async (e) => {
         setAddGoal({...addGoal, [e.target.name]: e.target.value })
