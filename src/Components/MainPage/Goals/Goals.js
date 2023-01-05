@@ -8,9 +8,7 @@ import '../Goals/Goals.css'
 import { TbPencil, TbTrash} from 'react-icons/tb'
 import EditGoal from "../../EditGoal/EditGoal.js";
 
-export default function Goals ({goals, setGoals, selectGoal, selectedGoal, setSelectedGoal, user, setUser, token}) {
-    // console.log(goals.goal)
-    console.log(selectedGoal, 'SELECTED GOAL')
+export default function Goals ({goals, setGoals, selectGoal, selectedGoal, user, setUser, token}) {
     const [addGoalModal, setAddGoalModal] = useState(false)
     const [editGoalModal, setEditGoalModal] = useState(false)
     const [updatedGoal, setUpdatedGoal] = useState({})
@@ -22,24 +20,12 @@ export default function Goals ({goals, setGoals, selectGoal, selectedGoal, setSe
             occurence: '',
         }
     )
-    // const [editGoalInput, setEditGoalInput] = useState(
-    //     {
-    //         goal: '',
-    //         description: '',
-    //         goalvalue: '',
-    //         occurence: '',
-    //     }
-    // )
     useEffect(() => {
         if(token) {
             getGoals(token)
         }
     }, [token])
     console.log(goals)
-
-    // function selectGoal(goals) {
-    //     setSelectedGoal(goals)
-    // }
 
     const url='https://goalmaster.herokuapp.com'
     const getGoals = async (token) => {
@@ -55,7 +41,6 @@ export default function Goals ({goals, setGoals, selectGoal, selectedGoal, setSe
         setUser(userGoals.data.email)
         console.log(user, 'GOALS USER')
         setGoals(userGoals.data.goals)
-        // setUpdatedGoal(userGoals.data.goals)
     }
     const handleChange = (e) => {
         setAddGoal({...addGoal, [e.target.name]: e.target.value })
@@ -94,19 +79,6 @@ export default function Goals ({goals, setGoals, selectGoal, selectedGoal, setSe
         console.log(selectedGoal._id)
         console.log(selectedId)
         try {
-        //     const data = await fetch(`https://goalmaster.herokuapp.com/api/goals/${selectedId}`, {
-        //         headers: { 'authorization': `bearer ${sessionStorage.getItem('ID Token')}`,
-        //         'Accept': 'application/json',
-        //         'Content-Type': 'application/json'},
-        //       method: "PUT",
-        //       body: JSON.stringify({
-        //         goal: updatedGoal.goal,
-        //         description: updatedGoal.description,
-        //         goalvalue: updatedGoal.goalvalue,
-        //         occurence: updatedGoal.occurence
-        //   })}).then((response) => {
-        //     console.log(response)
-        //   })
             const data = await axios.put(`https://goalmaster.herokuapp.com/api/goals/${selectedId}`, {
                     goal: updatedGoal.goal,
                     description: updatedGoal.description,
@@ -116,38 +88,12 @@ export default function Goals ({goals, setGoals, selectGoal, selectedGoal, setSe
                     headers: {
                         'Authorization': 'Bearer ' + token
                     }})
-            // this line filters all the 'unchanged' compositions into a new array
             let unchangedGoals = (goals.filter((goal) => goal._id !== selectedGoal._id))
             setGoals([data, ...unchangedGoals]);
           } catch (err) {
                 console.log(err.message);
           }
-        // console.log(editGoalModal, 'EDIT GOAL MODAL')
         console.log(selectedId)
-        // await fetch(`https://goalmaster.herokuapp.com/api/goals/${goalId}`, {
-        //         headers: { 'authorization': `bearer ${sessionStorage.getItem('ID Token')}`,
-        //         'Accept': 'application/json',
-        //         'Content-Type': 'application/json'},
-        //       method: "PUT",
-        //       body: JSON.stringify({
-        //         goal: updatedGoal.goal,
-        //         description: updatedGoal.description,
-        //         goalvalue: updatedGoal.goalvalue,
-        //         occurence: updatedGoal.occurence
-        //   })}).then((response) => {
-        //     console.log(response)
-        //   })
-        // await axios.put(`https://goalmaster.herokuapp.com/api/goals/${goalId}`, {
-        //     goal: updatedGoal.goal,
-        //     description: updatedGoal.description,
-        //     goalvalue: updatedGoal.goalvalue,
-        //     occurence: updatedGoal.occurence
-        // }, {
-        //     headers: {
-        //         'Authorization': 'Bearer ' + token
-        //     }})
-        // setEditGoalModal(false)
-        // setEditing(false)
         console.log(updatedGoal.goal)
         getGoals(token)
         console.log('AXIOS CALL')
@@ -156,7 +102,6 @@ export default function Goals ({goals, setGoals, selectGoal, selectedGoal, setSe
         setUpdatedGoal({
             ...updatedGoal, [e.target.name]: e.target.value
         })
-        // setUpdatedGoal({...updatedGoal, [e.target.name]: e.target.value })
         console.log(updatedGoal)
     }
     const handleSubmit = async (e) => {
@@ -180,18 +125,6 @@ export default function Goals ({goals, setGoals, selectGoal, selectedGoal, setSe
             </div>
             <button onClick={() => setAddGoalModal(true)}>New Goal</button>
             <AddGoal addGoal={addGoal} setAddGoal={setAddGoal} handleChange={handleChange} addGoalToUser={addGoalToUser} addGoalModal={addGoalModal} setAddGoalModal={setAddGoalModal} token={token}/>
-            {/* {editing ?
-            <div>
-                <EditGoal
-                setEditGoalModal={setEditGoalModal}
-                // goalId={goalId}
-                setGoals={setGoals}
-                handleEdit={handleEdit}
-                token={token}
-                editGoal={editGoal}
-            />
-            </div>
-            } */}
             <EditGoal handleSubmit={handleSubmit} goals={goals} selectedGoal={selectedGoal} updatedGoal={updatedGoal} handleEdit={handleEdit} editGoal={editGoal} editGoalModal={editGoalModal} setEditGoalModal={setEditGoalModal} addGoal={addGoal} />
         </div>
         
