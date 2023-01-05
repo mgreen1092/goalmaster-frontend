@@ -5,13 +5,13 @@ import { useState } from 'react'
 import { IoIosHome } from 'react-icons/io'
 import { Link } from 'react-router-dom'
 
-export default function MainPage ({logoutUser, token, user, setUser}) {
+export default function MainPage ({logoutUser, token, user, setUser, name}) {
     const [goals, setGoals] = useState()
 
     return (
         <div>
             <div className='nav'>
-                <h2>Welcome {user} </h2>
+                <h2>Welcome {name} </h2>
                 <Link to='/home'><div className='nav-home'>
                     <IoIosHome style={{color: 'black', fontSize: '1.3em'}}/>
                 </div></Link>

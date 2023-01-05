@@ -4,13 +4,12 @@ import { useEffect, useState } from 'react'
 import { getAuth, signOut, onAuthStateChanged, GoogleAuthProvider, FacebookAuthProvider, GithubAuthProvider, signInWithPopup  } from 'firebase/auth'
 import GoalDetails from './Components/MainPage/GoalDetails.js';
 import { Route, Routes } from 'react-router'
-import axios from 'axios'
-import AddGoal from './Components/MainPage/AddGoal/AddGoal';
 
 function App() {
   const [userAuth, setUserAuth] = useState(false || window.localStorage.getItem('auth')==='true')
   const [user, setUser] = useState()
   const [token, setToken] = useState('')
+  const [name, setName] = useState('')
   // const [loggingIn, setLoggingIn] = useState('')
   const googleProvider=new GoogleAuthProvider()
   const facebookProvider = new FacebookAuthProvider()
@@ -61,6 +60,7 @@ function App() {
         const name = result.user.displayName
         const email = result.user.email
         console.log(name)
+        setName(name)
         setUser(email)
         const profilePic = result.user.photoURL
 
@@ -108,7 +108,7 @@ console.log(user, '-------------------')
     <div className="Nav">
       {/* <h1 className='title'>GOAL MASTER</h1> */}
       {userAuth ? (
-        <MainPage logoutUser={logoutUser} setUser={setUser} user={user} token={token}/>
+        <MainPage logoutUser={logoutUser} setUser={setUser} user={user} name={name} token={token}/>
       ) : ( 
       <div className="App">
         <h1 className='title'>GOAL MASTER</h1>
