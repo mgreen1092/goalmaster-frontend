@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { IoIosHome } from 'react-icons/io'
 import { Link } from 'react-router-dom'
 
-export default function MainPage ({logoutUser, token, user}) {
+export default function MainPage ({logoutUser, token, user, setUser}) {
     const [goals, setGoals] = useState()
 
     return (
@@ -17,10 +17,9 @@ export default function MainPage ({logoutUser, token, user}) {
                 </div></Link>
             </div>
             <div>
-                {/* <h2>Welcome {user} </h2> */}
             </div>
             <div className='App'>
-                <Goals user={user} token={token} goals={goals} setGoals={setGoals}/>
+                <Goals user={user} setUser={setUser} token={token} goals={goals} setGoals={setGoals}/>
                 <button className='logout-button' onClick={logoutUser}>Logout</button>
             </div>
 		</div>

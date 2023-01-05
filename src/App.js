@@ -60,9 +60,8 @@ function App() {
           })
         const name = result.user.displayName
         const email = result.user.email
-        console.log(email)
+        console.log(name)
         setUser(email)
-        // let userData
         const profilePic = result.user.photoURL
 
         localStorage.setItem('name', name);
@@ -109,7 +108,7 @@ console.log(user, '-------------------')
     <div className="Nav">
       {/* <h1 className='title'>GOAL MASTER</h1> */}
       {userAuth ? (
-        <MainPage logoutUser={logoutUser} user={user} token={token}/>
+        <MainPage logoutUser={logoutUser} setUser={setUser} user={user} token={token}/>
       ) : ( 
       <div className="App">
         <h1 className='title'>GOAL MASTER</h1>

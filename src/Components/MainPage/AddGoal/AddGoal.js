@@ -1,45 +1,47 @@
-import React from "react";
+import React, { useEffect } from "react";
 import '../AddGoal/AddGoal.css'
 import { useState } from 'react'
 import axios from 'axios'
 import { IoIosCloseCircle } from 'react-icons/io'
 
-export default function AddGoal ({addGoalModal, setAddGoalModal, token}) {
-    const [addGoal, setAddGoal] = useState(
-        {
-            goal: '',
-            description: '',
-            goalvalue: '',
-            occurence: '',
-        }
-    )
-    const handleChange = (e) => {
-        // const addedGoal = { ...addGoal }
-        // addGoal[e.target.name] = e.target.value
-        setAddGoal({...addGoal, [e.target.name]: e.target.value })
-        // setAddGoal(addedGoal)
-    }
-    console.log(addGoal)
-    const addGoalToUser = async (e) => {
-        e.preventDefault()
-        try {
-            const goalToAdd = axios.post('https://goalmaster.herokuapp.com/api/goals',
-              {addGoal}, {
-                    headers: {
-                        'Authorization': 'Bearer ' + token
-                    }
-                })
-        }catch (err) {
-            console.log(err);
-          }
-          setAddGoal({
-            goal: '',
-            description: '',
-            goalvalue: '',
-            occurence: '',
-          })
-          setAddGoalModal(false)
-    }
+export default function AddGoal ({addGoalModal, setAddGoalModal, token, addGoal, setAddGoal, handleChange, addGoalToUser}) {
+    // const [addGoal, setAddGoal] = useState(
+    //     {
+    //         goal: '',
+    //         description: '',
+    //         goalvalue: '',
+    //         occurence: '',
+    //     }
+    // )
+    // useEffect(() => {
+    //     const getAllGoals = async () => {
+    //         const response = await axios.get('https://goalmaster.herokuapp.com/goals')
+    //     }
+    // })
+
+    // const handleChange = (e) => {
+    //     setAddGoal({...addGoal, [e.target.name]: e.target.value })
+    // }
+    // const addGoalToUser = async (e) => {
+    //     e.preventDefault()
+    //     try {
+    //         const goalToAdd = axios.post('https://goalmaster.herokuapp.com/api/goals',
+    //           {addGoal}, {
+    //                 headers: {
+    //                     'Authorization': 'Bearer ' + token
+    //                 }
+    //             })
+    //     }catch (err) {
+    //         console.log(err);
+    //       }
+    //       setAddGoal({
+    //         goal: '',
+    //         description: '',
+    //         goalvalue: '',
+    //         occurence: '',
+    //       })
+    //       setAddGoalModal(false)
+    // }
     return (
         <div>
             <div className='add-goal' style={{ display: addGoalModal ? 'flex' : 'none' }} >
