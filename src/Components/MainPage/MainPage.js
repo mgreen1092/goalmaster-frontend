@@ -6,7 +6,13 @@ import { IoIosHome } from 'react-icons/io'
 import { Link } from 'react-router-dom'
 
 export default function MainPage ({logoutUser, token, user, setUser, name}) {
-    const [goals, setGoals] = useState()
+    const [goals, setGoals] = useState([])
+    const [selectedGoal, setSelectedGoal] = useState('')
+
+    function selectGoal(goal) {
+        setSelectedGoal(goal)
+        console.log(goal)
+    }
 
     return (
         <div>
@@ -19,7 +25,7 @@ export default function MainPage ({logoutUser, token, user, setUser, name}) {
             <div>
             </div>
             <div className='App'>
-                <Goals user={user} setUser={setUser} token={token} goals={goals} setGoals={setGoals}/>
+                <Goals selectGoal={selectGoal} selectedGoal={selectedGoal} setSelectedGoal={setSelectedGoal} user={user} setUser={setUser} token={token} goals={goals} setGoals={setGoals}/>
                 <button className='logout-button' onClick={logoutUser}>Logout</button>
             </div>
 		</div>
