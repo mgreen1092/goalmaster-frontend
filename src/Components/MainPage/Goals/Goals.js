@@ -19,7 +19,7 @@ export default function Goals ({goals, setGoals, user, token}) {
         console.log(token, 'GOAL TOKEN')
         const urlPath = `${url}/users/${user}`
         console.log(urlPath)
-        let userGoals = await axios.get(`${url}/api/users/${user}`, {
+        let userGoals = await axios.get(`${url}/api/goals/`, {
             headers: {
                 'Authorization': 'Bearer ' + token
             }
