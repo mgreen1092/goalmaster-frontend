@@ -6,9 +6,27 @@ import AddGoal from '../AddGoal/AddGoal.js'
 import { Link } from 'react-router-dom'
 import '../Goals/Goals.css'
 import { TbPencil, TbTrash} from 'react-icons/tb'
+import EditGoal from "../../EditGoal/EditGoal.js";
 
 export default function Goals ({goals, setGoals, user, setUser, token}) {
     const [addGoalModal, setAddGoalModal] = useState(false)
+    const [editGoalModal, setEditGoalModal] = useState(false)
+    const [addGoal, setAddGoal] = useState(
+        {
+            goal: '',
+            description: '',
+            goalvalue: '',
+            occurence: '',
+        }
+    )
+    // const [editGoalInput, setEditGoalInput] = useState(
+    //     {
+    //         goal: '',
+    //         description: '',
+    //         goalvalue: '',
+    //         occurence: '',
+    //     }
+    // )
     useEffect(() => {
         if(token) {
             getGoals(token)
@@ -34,16 +52,6 @@ export default function Goals ({goals, setGoals, user, setUser, token}) {
         console.log(userGoals.data.goals)
         setGoals(userGoals.data.goals)
     }
-
-    const [addGoal, setAddGoal] = useState(
-        {
-            goal: '',
-            description: '',
-            goalvalue: '',
-            occurence: '',
-        }
-    )
-
     const handleChange = (e) => {
         setAddGoal({...addGoal, [e.target.name]: e.target.value })
     }
@@ -66,8 +74,7 @@ export default function Goals ({goals, setGoals, user, setUser, token}) {
             occurence: '',
           })
           setAddGoalModal(false)
-          const updatedUser = await axios.get('https://goalmaster.herokuapp.com/api/goals')
-          setUser(updatedUser.data.goals)
+        getGoals(token)
     }
     const deleteGoal = async (goalId) => {
         console.log(goalId)
@@ -75,9 +82,19 @@ export default function Goals ({goals, setGoals, user, setUser, token}) {
             headers: {
                 'Authorization': 'Bearer ' + token
             }})
-        // const updatedUser = await axios.get('https://goalmaster.herokuapp.com/api/goals')
-        // setUser(updatedUser.data.goals)
         getGoals(token)
+    }
+    const editGoal = async (goalId) => {
+        console.log(goalId)
+        await axios.put(`https://goalmaster.herokuapp.com/api/goals/${goalId}`, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }})
+        setEditGoalModal(false)
+        getGoals(token)
+    }
+    const handleEdit = async (e) => {
+        setAddGoal({...addGoal, [e.target.name]: e.target.value })
     }
     return (
         <div >
@@ -88,11 +105,12 @@ export default function Goals ({goals, setGoals, user, setUser, token}) {
                     <p>Description: {goal.description}</p>
                     <p>Value: {goal.goalvalue}{goal.time}</p>
                     <p>To be completed: {goal.occurence}</p>
-                    <TbPencil style={{ fontSize: '1em', color: 'black' }} className='goal-edit-button' />
+                    <TbPencil style={{ fontSize: '1em', color: 'black' }} className='goal-edit-button' onClick={() => {setEditGoalModal(true); editGoal(goal._id)}}/>
                 </div>)}
             </div>
             <button onClick={() => setAddGoalModal(true)}>New Goal</button>
             <AddGoal addGoal={addGoal} setAddGoal={setAddGoal} handleChange={handleChange} addGoalToUser={addGoalToUser} addGoalModal={addGoalModal} setAddGoalModal={setAddGoalModal} token={token}/>
+            <EditGoal handleEdit={handleEdit} editGoal={editGoal} editGoalModal={editGoalModal} setEditGoalModal={setEditGoalModal} addGoal={addGoal} />
         </div>
         
     )
