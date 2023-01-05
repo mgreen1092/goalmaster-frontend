@@ -2,7 +2,7 @@ import React from 'react'
 import './EditGoal.css'
 import { IoIosCloseCircle } from 'react-icons/io'
 
-export default function EditGoal ({goals, editGoalModal, setEditGoalModal, updatedGoal, selectedGoal, handleEdit, editGoal, handleSubmit}) {
+export default function EditGoal ({ editGoalModal, setEditGoalModal, updatedGoal, selectedGoal, handleEdit, handleSubmit}) {
     return (
         <div>
             {selectedGoal &&

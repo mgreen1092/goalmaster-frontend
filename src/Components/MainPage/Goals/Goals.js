@@ -13,13 +13,7 @@ export default function Goals ({goals, setGoals, selectGoal, selectedGoal, setSe
     console.log(selectedGoal, 'SELECTED GOAL')
     const [addGoalModal, setAddGoalModal] = useState(false)
     const [editGoalModal, setEditGoalModal] = useState(false)
-    // const [editing, setEditing] = useState(false)
-    const [updatedGoal, setUpdatedGoal] = useState({
-        // goal: selectedGoal.goal,
-        // description: selectedGoal.description,
-        // goalvalue: selectedGoal.goalvalue,
-        // occurence: selectedGoal.occurence,
-    })
+    const [updatedGoal, setUpdatedGoal] = useState({})
     const [addGoal, setAddGoal] = useState(
         {
             goal: '',
