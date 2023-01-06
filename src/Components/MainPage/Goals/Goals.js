@@ -108,13 +108,13 @@ export default function Goals ({goals, setGoals, selectGoal, selectedGoal, user,
             <div className='split left'>
                 {goals?.map((goal, index) => 
                 <div key={index} className='goal-goal'>
-                    <Link to={'goals/' + goal._id}>{goal.goal}</Link><TbTrash className='delete-button' style={{ fontSize: '1em', color: 'teal' }} onClick={() => deleteGoal(goal._id)} />
+                    <Link to={'goals/' + goal._id}>{goal.goal}</Link><TbTrash className='delete-button' style={{ fontSize: '1em', color: '#042C47' }} onClick={() => deleteGoal(goal._id)} />
                     <p>Description: {goal.description}</p>
                     <p>Value: {goal.goalvalue}{goal.time}</p>
                     <p>To be completed: {goal.occurence}</p>
                     <TbPencil style={{ fontSize: '1em', color: 'black' }} className='goal-edit-button' onClick={() => {setEditGoalModal(true); selectGoal(goal)}}/>
                 </div>)}
-                <button onClick={() => setAddGoalModal(true)}>New Goal</button>
+                <button onClick={() => setAddGoalModal(true)} className='new-goal'>New Goal</button>
             </div>
             <div className='split right'>
                 <img src="https://amplifieddigitalagency.com/wp-content/uploads/SMARTS-Goals-Blog-Graphic-1-533x800.png" alt='Goals' className='goals-image' />

@@ -7,8 +7,8 @@ export default function AddGoal ({addGoalModal, setAddGoalModal, token, addGoal,
         <div>
             <div className='add-goal' style={{ display: addGoalModal ? 'flex' : 'none' }} >
                 <form className='add-goal-form' style={{ position: 'relative' }} >
-                    <IoIosCloseCircle style={{ color: 'teal', fontSize: '2em', position: 'absolute', right: '1em', cursor: 'pointer' }} onClick={() => setAddGoalModal(false)} />
-                    <h1>Add a New Goal</h1>
+                    <IoIosCloseCircle style={{ color: '#042C47', fontSize: '2em', position: 'absolute', right: '1em', cursor: 'pointer' }} onClick={() => setAddGoalModal(false)} />
+                    <h1 className='form-title'>Add a New Goal</h1>
                     <p>Goal</p>
                     <input className='name-input' placeholder='Goal' name='goal' value={addGoal.goal} onChange={handleChange}></input>
                     <p>Goal Description</p>

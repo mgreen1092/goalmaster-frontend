@@ -32,28 +32,21 @@
     background-color: white;
 }
 .goal-goal {
-    border: 2px solid teal;
+    border: 2px solid #042C47;
     margin: 10px;
     padding: 10px;
     border-radius: 25px;
-    box-shadow: 2px 2px 1px teal;
+    box-shadow: 2px 2px 1px #042C47;
 }
 .delete-button {
-    margin-left: 20px;
+    margin-left: 370px;
+    cursor: pointer;
 }
-.goal-edit-button {
-    /* margin-left: 20px; */
+.goal-edit-button, .new-goal {
+    cursor: pointer;
 }
-.goal-goal:hover { 
-    /* transform: scale(1.2, 1.1);  */
-}
+
 a:link{
     color: black;
     text-decoration: none;
-}
-a:hover{
-    font-weight: bold;
-}
-a:visited{
-    color: black;
 }

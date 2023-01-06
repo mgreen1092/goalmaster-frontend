@@ -35,7 +35,7 @@
   
   
 .logout-button {
-    background-color: teal;
+    background-color: #042C47;
     border: none;
     color: white;
     box-shadow: 0 1px 6px #ccc;
@@ -45,5 +45,6 @@
     margin-right: 10px;
     margin-left: 20px;
     padding: 12px;
+    cursor: pointer;
   }
   

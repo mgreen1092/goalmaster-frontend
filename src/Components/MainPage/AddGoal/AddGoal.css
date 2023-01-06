@@ -1,3 +1,6 @@
+.form-title {
+    font-family: 'Oswald', sans-serif;
+}
 .add-goal {
     width: 100vw;
     height: 100vh;
@@ -22,6 +25,7 @@
     text-align: center;
     background-color: #2B3035;
     border-radius: 10px;
+    font-family: 'Mada', sans-serif;
 }
 
 .add-goal-form>input,
@@ -43,19 +47,15 @@ select {
     height: 2.5em;
 }
 
-.add-to-goal-button {
+.add-to-goals-button {
     width: 30%;
     font-family: spotify, sans-serif;
     align-self: center;
-    background-color: teal;
+    background-color: #042C47;
     border-radius: 20px;
+    width: 100%;
     border: none;
     padding: 1em;
     margin-top: 1em;
     cursor: pointer;
-}
-
-.add {
-    color: teal;
-    font-size: 20px;
 }
