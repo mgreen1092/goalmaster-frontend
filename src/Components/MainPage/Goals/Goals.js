@@ -25,7 +25,7 @@ export default function Goals ({goals, setGoals, selectGoal, selectedGoal, user,
         if(token) {
             getGoals(token)
         }
-    }, [token])
+    }, [token, addGoal])
 
     const url='https://goalmaster.herokuapp.com'
     const getGoals = async (token) => {
