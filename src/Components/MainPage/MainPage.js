@@ -17,7 +17,7 @@ export default function MainPage ({logoutUser, token, user, setUser, name}) {
     return (
         <div>
             <div className='nav'>
-                <h2>Welcome {name} </h2>
+                <h2>Welcome {user} </h2>
                 <Link to='/home'><div className='nav-home'>
                     <IoIosHome style={{color: 'black', fontSize: '1.3em'}}/>
                 </div></Link>

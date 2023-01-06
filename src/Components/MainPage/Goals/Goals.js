@@ -20,27 +20,22 @@ export default function Goals ({goals, setGoals, selectGoal, selectedGoal, user,
             occurence: '',
         }
     )
+    console.log(token)
     useEffect(() => {
         if(token) {
             getGoals(token)
         }
     }, [token])
-    console.log(goals)
 
     const url='https://goalmaster.herokuapp.com'
     const getGoals = async (token) => {
-        console.log(token, 'GOAL TOKEN')
-        const urlPath = `${url}/users/${user}`
-        console.log(urlPath)
         let userGoals = await axios.get(`${url}/api/goals/`, {
             headers: {
                 'Authorization': 'Bearer ' + token
             }
         })
-        console.log(userGoals.data)
         setUser(userGoals.data.email)
-        console.log(user, 'GOALS USER')
-        setGoals(userGoals.data.goals)
+        setGoals([...userGoals.data.goals])
     }
     const handleChange = (e) => {
         setAddGoal({...addGoal, [e.target.name]: e.target.value })
@@ -63,7 +58,7 @@ export default function Goals ({goals, setGoals, selectGoal, selectedGoal, user,
             goalvalue: '',
             occurence: '',
           })
-          setAddGoalModal(false)
+        setAddGoalModal(false)
         getGoals(token)
     }
     const deleteGoal = async (goalId) => {
@@ -96,7 +91,6 @@ export default function Goals ({goals, setGoals, selectGoal, selectedGoal, user,
         console.log(selectedId)
         console.log(updatedGoal.goal)
         getGoals(token)
-        console.log('AXIOS CALL')
     }
     const handleEdit = async (e) => {
         setUpdatedGoal({
@@ -106,9 +100,7 @@ export default function Goals ({goals, setGoals, selectGoal, selectedGoal, user,
     }
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(e)
         setEditGoalModal(false)
-        console.log(e.target.id.value)
         editGoal(e.target.id.value)
     }
     return (
@@ -124,7 +116,7 @@ export default function Goals ({goals, setGoals, selectGoal, selectedGoal, user,
                 </div>)}
             </div>
             <button onClick={() => setAddGoalModal(true)}>New Goal</button>
-            <AddGoal addGoal={addGoal} setAddGoal={setAddGoal} handleChange={handleChange} addGoalToUser={addGoalToUser} addGoalModal={addGoalModal} setAddGoalModal={setAddGoalModal} token={token}/>
+            <AddGoal addGoal={addGoal} setAddGoal={setAddGoal} handleChange={handleChange} addGoalToUser={addGoalToUser} addGoalModal={addGoalModal} setAddGoalModal={setAddGoalModal} token={token} />
             <EditGoal handleSubmit={handleSubmit} goals={goals} selectedGoal={selectedGoal} updatedGoal={updatedGoal} handleEdit={handleEdit} editGoal={editGoal} editGoalModal={editGoalModal} setEditGoalModal={setEditGoalModal} addGoal={addGoal} />
         </div>
         

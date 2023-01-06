@@ -2,8 +2,7 @@ import './App.css';
 import MainPage from './Components/MainPage/MainPage.js';
 import { useEffect, useState } from 'react'
 import { getAuth, signOut, onAuthStateChanged, GoogleAuthProvider, FacebookAuthProvider, GithubAuthProvider, signInWithPopup  } from 'firebase/auth'
-import GoalDetails from './Components/MainPage/GoalDetails.js';
-import { Route, Routes } from 'react-router'
+
 
 function App() {
   const [userAuth, setUserAuth] = useState(false || window.localStorage.getItem('auth')==='true')
@@ -18,12 +17,10 @@ function App() {
 
   useEffect(() => {
     onAuthStateChanged(auth, (response) => {
-      console.log(response, 'RESPONSE')
       if (response) {
         setUserAuth(true)
         window.localStorage.setItem('auth', 'true')
         response.getIdToken().then((token) => {
-          console.log(token, 'TOKEN')
           setToken(token)
         })
       }
@@ -32,7 +29,6 @@ function App() {
 
   const signInWithGoogle = () => {
     signInWithPopup(auth, googleProvider).then((result) => {
-        console.log(result, '+++++++++++')
           sessionStorage.setItem('Auth Token', result._tokenResponse.refreshToken)
           sessionStorage.setItem('ID Token', result._tokenResponse.idToken)
           const header = { headers: { authorization: `bearer ${sessionStorage.getItem('ID Token')}`,
@@ -40,7 +36,6 @@ function App() {
           'Content-Type': 'application/json'} }
           fetch(`https://goalmaster.herokuapp.com/api/users/${result.user.email}`, header)
           .then((response) => {
-            console.log(response)
             if (!response.ok) {
               fetch('https://goalmaster.herokuapp.com/api/users/', {
                 headers: { 'authorization': `bearer ${sessionStorage.getItem('ID Token')}`,
@@ -59,7 +54,6 @@ function App() {
           })
         const name = result.user.displayName
         const email = result.user.email
-        console.log(name)
         setName(name)
         setUser(email)
         const profilePic = result.user.photoURL
@@ -72,60 +66,30 @@ function App() {
         console.log(error)
     });
   }
-  const signInWithFacebook = () => {
-    signInWithPopup(auth, facebookProvider).then((result) => {
-        console.log(result)
-        if (result) {
-          setUserAuth(true)
-          window.localStorage.setItem('auth', 'true')
-        }
-    }).catch((error)=> {
-        console.log(error.message)
-    })
-  }
-  const signInWithGitHub = () => {
-    signInWithPopup(auth, gitHubProvider).then((result) => {
-        console.log(result)
-        if (result) {
-          setUserAuth(true)
-          window.localStorage.setItem('auth', 'true')
-        }
-    }).catch((error)=> {
-        console.log(error.message)
-    })
-  }
   const logoutUser = () => {
     signOut(auth).then(() => {
-        console.log('SIGN OUT SUCCESS')
         setUserAuth(false)
         setUser('')
     }).catch((error) => {
         console.log(error)
     })
 }
-console.log(user, '-------------------')
   return (
     <div className="Nav">
-      {/* <h1 className='title'>GOAL MASTER</h1> */}
       {userAuth ? (
         <MainPage logoutUser={logoutUser} setUser={setUser} user={user} name={name} token={token}/>
       ) : ( 
+      <div>
       <div className="App">
         <h1 className='title'>GOAL MASTER</h1>
-      <div className = 'container'>
-        <button className='login-with-google-btn' onClick={signInWithGoogle}>Sign in with Google</button>
-        <button className='login-with-facebook' onClick={signInWithFacebook}>Sign in with Facebook</button>
-        <button className='login-with-github' onClick={signInWithGitHub}>Sign in with GitHub </button>
+        <div className = 'container'>
+          <button className='login-with-google-btn' onClick={signInWithGoogle}>Sign in with Google</button>
+      </div>
     </div>
+    <div className='page'> hi</div>
     </div>
     )}
-    <Routes>
-      <Route path='goals/:id' element={<GoalDetails />} />
-      <Route path='/home' element={<MainPage />} />
-      {/* <Route path='/addGoal' element={<AddGoal />} /> */}
-    </Routes>
     </div>
-    // </div>
   );
 }
 
