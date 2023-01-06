@@ -8,7 +8,9 @@ The best way to accomplish goals to quantify them and make them as specific as p
 
 ## Screenshots
 
-(https://imgur.com/kokSKNz)
+https://imgur.com/kokSKNz
+https://imgur.com/TUrXliT
+https://imgur.com/saXLtEl
 
 
 ## Tech Stack
