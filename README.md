@@ -1,7 +1,7 @@
 
 # GoalMaster
 
-The best way to accomplish goals to quantify them and make them as specific as possible. GoalMaster is a user friendly application which allows users to make an individual account to document goal progress. It provides information on your goal, a description to make further speficiations, a quatifiable value, and the occurence of how often you will be completing this goal. 
+The best way to accomplish goals is to quantify them and make them as specific as possible. GoalMaster is a user-friendly application which allows users to make an individual account to document goal progress. It provides information on your goal, a description to make further specifications, a quantifiable value, and the occurrence of how often you will be completing this goal.
 
 
 
