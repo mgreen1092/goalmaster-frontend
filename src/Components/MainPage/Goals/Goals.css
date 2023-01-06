@@ -1,6 +1,12 @@
 .goals-container {
     background-color: lightslategray;
 }
+.goal-header {
+    display: flex;
+    align-items: left;
+    justify-content: space-between;
+    flex-direction: row;
+}
 .image-container {
     display: flex;
     justify-content: center;

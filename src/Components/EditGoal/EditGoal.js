@@ -8,7 +8,7 @@ export default function EditGoal ({ editGoalModal, setEditGoalModal, updatedGoal
             {selectedGoal &&
             <div className='add-goal' style={{ display: editGoalModal ? 'flex' : 'none' }} >
                 <form className='add-goal-form' style={{ position: 'relative' }} onSubmit={handleSubmit} >
-                    <IoIosCloseCircle style={{ color: 'teal', fontSize: '2em', position: 'absolute', right: '1em', cursor: 'pointer' }} onClick={() => setEditGoalModal(false)} />
+                    <IoIosCloseCircle style={{ color: '#042C47', fontSize: '2em', position: 'absolute', right: '1em', cursor: 'pointer' }} onClick={() => setEditGoalModal(false)} />
                     <h1>Edit Goal</h1>
                     <p>Goal</p>
                     <input hidden readOnly name='id' value={selectedGoal._id}></input>

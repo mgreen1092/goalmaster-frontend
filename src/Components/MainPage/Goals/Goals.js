@@ -108,11 +108,16 @@ export default function Goals ({goals, setGoals, selectGoal, selectedGoal, user,
             <div className='split left'>
                 {goals?.map((goal, index) => 
                 <div key={index} className='goal-goal'>
-                    <Link to={'goals/' + goal._id}>{goal.goal}</Link><TbTrash className='delete-button' style={{ fontSize: '1em', color: '#042C47' }} onClick={() => deleteGoal(goal._id)} />
+                    <div className='goal-header'>
+                        <Link to={'goals/' + goal._id}>{goal.goal}</Link>
+                        <TbPencil style={{ fontSize: '1em', color: 'black' }} className='goal-edit-button' onClick={() => {setEditGoalModal(true); selectGoal(goal)}}/>
+                    </div>
                     <p>Description: {goal.description}</p>
                     <p>Value: {goal.goalvalue}{goal.time}</p>
-                    <p>To be completed: {goal.occurence}</p>
-                    <TbPencil style={{ fontSize: '1em', color: 'black' }} className='goal-edit-button' onClick={() => {setEditGoalModal(true); selectGoal(goal)}}/>
+                    <div className='goal-header'>
+                        <p>To be completed: {goal.occurence}</p>
+                        <TbTrash className='delete-button' style={{ fontSize: '1em', color: '#042C47' }} onClick={() => deleteGoal(goal._id)} />
+                    </div>
                 </div>)}
                 <button onClick={() => setAddGoalModal(true)} className='new-goal'>New Goal</button>
             </div>
