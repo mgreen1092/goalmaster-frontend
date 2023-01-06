@@ -21,6 +21,7 @@ export default function Goals ({goals, setGoals, selectGoal, selectedGoal, user,
         }
     )
     useEffect(() => {
+        addGoalToUser()
         if(token) {
             getGoals(token)
         }
@@ -42,7 +43,7 @@ export default function Goals ({goals, setGoals, selectGoal, selectedGoal, user,
     const addGoalToUser = async (e) => {
         e.preventDefault()
         try {
-            const goalToAdd = axios.post('https://goalmaster.herokuapp.com/api/goals',
+            axios.post('https://goalmaster.herokuapp.com/api/goals',
               {addGoal}, {
                     headers: {
                         'Authorization': 'Bearer ' + token
@@ -51,6 +52,7 @@ export default function Goals ({goals, setGoals, selectGoal, selectedGoal, user,
                 .then(res => {
                     setGoals([...goals, res.data])
                 })
+                console.log('hi')
         }catch (err) {
             console.log(err);
           }
@@ -62,6 +64,7 @@ export default function Goals ({goals, setGoals, selectGoal, selectedGoal, user,
           })
         setAddGoalModal(false)
         getGoals(token)
+        console.log('REACHING getGoals')
     }
     const deleteGoal = async (goalId) => {
         console.log(goalId)
@@ -72,9 +75,6 @@ export default function Goals ({goals, setGoals, selectGoal, selectedGoal, user,
         getGoals(token)
     }
     const editGoal = async (selectedId) => {
-        console.log(updatedGoal, '====================')
-        console.log(selectedGoal._id)
-        console.log(selectedId)
         try {
             const data = await axios.put(`https://goalmaster.herokuapp.com/api/goals/${selectedId}`, {
                     goal: updatedGoal.goal,
@@ -90,8 +90,6 @@ export default function Goals ({goals, setGoals, selectGoal, selectedGoal, user,
           } catch (err) {
                 console.log(err.message);
           }
-        console.log(selectedId)
-        console.log(updatedGoal.goal)
         getGoals(token)
     }
     const handleEdit = async (e) => {
