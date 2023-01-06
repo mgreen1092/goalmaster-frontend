@@ -1,3 +1,13 @@
+.goal-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 30vh;
+    flex-direction: column;
+    border: 2px solid teal;
+    padding-left: 100px;
+    padding-right: 100px;
+}
 .goal-goal {
     border: 2px solid black;
     margin: 10px;

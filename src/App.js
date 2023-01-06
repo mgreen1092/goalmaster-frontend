@@ -2,17 +2,16 @@ import './App.css';
 import MainPage from './Components/MainPage/MainPage.js';
 import { useEffect, useState } from 'react'
 import { getAuth, signOut, onAuthStateChanged, GoogleAuthProvider, FacebookAuthProvider, GithubAuthProvider, signInWithPopup  } from 'firebase/auth'
-
+import axios from 'axios'
 
 function App() {
   const [userAuth, setUserAuth] = useState(false || window.localStorage.getItem('auth')==='true')
   const [user, setUser] = useState()
   const [token, setToken] = useState('')
   const [name, setName] = useState('')
+  const [quote, setQuote] = useState('')
   // const [loggingIn, setLoggingIn] = useState('')
   const googleProvider=new GoogleAuthProvider()
-  const facebookProvider = new FacebookAuthProvider()
-  const gitHubProvider = new GithubAuthProvider()
   const auth = getAuth();
 
   useEffect(() => {
@@ -73,11 +72,22 @@ function App() {
     }).catch((error) => {
         console.log(error)
     })
-}
+  }
+  // useEffect (() => {
+  //   getQuote()
+  // })
+  // const getQuote = async () => {
+  //   let quote = await axios('https://api.api-ninjas.com/v1/quotes?category=success', {
+  //     headers: {
+  //       'X-Api-Key': 'cEW3Z5q4mXVaw+Ug2wePzA==ZG7oA3iNZQdv8Ggo'
+  //     }
+  //   })
+  //   setQuote(quote.data[0].quote)
+  // }
   return (
     <div className="Nav">
       {userAuth ? (
-        <MainPage logoutUser={logoutUser} setUser={setUser} user={user} name={name} token={token}/>
+        <MainPage logoutUser={logoutUser} setUser={setUser} user={user} name={name} token={token} quote={quote}/>
       ) : ( 
       <div>
       <div className="App">
@@ -87,7 +97,7 @@ function App() {
       </div>
     </div>
     <div className='page'> 
-        <img alt='SMART Goals' class='image' src="https://www.incimages.com/uploaded_files/image/1920x1080/getty_537586633_360886.jpg" />
+        <img alt='SMART Goals' className='image' src="https://www.incimages.com/uploaded_files/image/1920x1080/getty_537586633_360886.jpg" />
     </div>
     </div>
     )}

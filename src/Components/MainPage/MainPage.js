@@ -2,10 +2,8 @@ import React from "react";
 import '../MainPage/MainPage.css'
 import Goals from './Goals/Goals.js'
 import { useState } from 'react'
-import { IoIosHome } from 'react-icons/io'
-import { Link } from 'react-router-dom'
 
-export default function MainPage ({logoutUser, token, user, setUser, name}) {
+export default function MainPage ({quote, logoutUser, token, user, setUser, name}) {
     const [goals, setGoals] = useState([])
     const [selectedGoal, setSelectedGoal] = useState('')
 
@@ -17,16 +15,19 @@ export default function MainPage ({logoutUser, token, user, setUser, name}) {
     return (
         <div>
             <div className='nav'>
-                <h2>Welcome {user} </h2>
-                <Link to='/home'><div className='nav-home'>
-                    <IoIosHome style={{color: 'black', fontSize: '1.3em'}}/>
-                </div></Link>
+                <h2 className='welcome'>Welcome {user} </h2>
+                <div className='nav-container'>
+                    <div className='nav-home'>
+                        {/* <IoIosHome className='home' style={{color: 'black', fontSize: '2.5em'}}/> */}
+                        <button className='logout-button' onClick={logoutUser}>Logout</button>
+                    </div>
+                </div>
             </div>
             <div>
             </div>
-            <div className='App'>
+            <div className='goals'>
+                <p>{quote}</p>
                 <Goals selectGoal={selectGoal} selectedGoal={selectedGoal} setSelectedGoal={setSelectedGoal} user={user} setUser={setUser} token={token} goals={goals} setGoals={setGoals}/>
-                <button className='logout-button' onClick={logoutUser}>Logout</button>
             </div>
 		</div>
     )

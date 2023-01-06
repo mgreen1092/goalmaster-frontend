@@ -1,70 +1,102 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# GoalMaster
 
-## Available Scripts
+The best way to accomplish goals to quantify them and make them as specific as possible. GoalMaster is a user friendly application which allows users to make an individual account to document goal progress. It provides information on your goal, a description to make further speficiations, a quatifiable value, and the occurence of how often you will be completing this goal. 
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Screenshots
 
-### `npm test`
+(https://imgur.com/kokSKNz)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Tech Stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Client:** React, CSS, Firebase User Authentication
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Libraries:** Axios, React-Icons
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Server:** Node, Express, MongoDB
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Wireframe React Component Hierarchy, and ERD
+- [Wireframe](https://drive.google.com/file/d/1CbcV0lFn5kBq7OFwvQZk8LXhSLZocICJ/view?usp=sharing)
+- [Component Hierarchy](https://drive.google.com/file/d/1Nuzjx3bRhiAJBi5RNole-_YCfYAehJqG/view?usp=sharing)
+- [ERD](https://drive.google.com/file/d/1wWpyE8zzN7v-kJCC8sSNciyJMQvb3BHY/view?usp=sharing)
+## MVP Goals
+- Have a login and signup using firebase authentication
+- Have a main page to view goals
+- Create new goals
+- API of success quotes
+- Edit goals
+- Delete goals
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Post MVP Goals
+- Have motivational quotes above the goals
+- Light and dark mode option for users
+- Data visualization for value completed for each goal(D3 or Recharts)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Components
 
-## Learn More
+| Component    | Description                                                              |
+| ------------ | ------------------------------------------------------------------------ |
+| App          | Contains Google Firebase sign in, transition to main page when user is signed in |
+| MainPage     | Welcomes the user, displays the goals page, and provides a logout button                         |
+| Goal    | Provides a list of all the goals created by the user. Allows user to create, edit, and delete goals           |
+| AddGoal      | Modal that appears when the user wants to create a new goal                            |
+| EditGoal     | Modal that appears when the user wants to edit goals                      |
+| Graph        | Displays time series data                                                |
+| firebase-config | Firebase configuration                                     |
+                           
+## Time Frames
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+| Component        | Priority | Estimated Time | Time Invested | 
+| ---------------- | -------- | -------------- | ------------- | 
+| Firebase | H        | 8 hours        | 20 hours       | 
+| Goals to appear      | H        | 4 hours      | 4 hour        | 
+| Creating Goals            | H        | 2 hours        | 2 hour        | 
+| Editing Goals         | H        | 2 hours        | 6 hour        | 
+| Deleting Goals         | H        | 1 hours        | 3 hours       | 
+| Backend Database seeded      | H        | 2 hours        | 4 hours       | 
+| Backend Database setup        | H        | 6 hours        | 10 hours       |
 
-### Code Splitting
+## Code Snippet
+```
+const signInWithGoogle = () => {
+    signInWithPopup(auth, googleProvider).then((result) => {
+          sessionStorage.setItem('Auth Token', result._tokenResponse.refreshToken)
+          sessionStorage.setItem('ID Token', result._tokenResponse.idToken)
+          const header = { headers: { authorization: `bearer ${sessionStorage.getItem('ID Token')}`,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'} }
+          fetch(`https://goalmaster.herokuapp.com/api/users/${result.user.email}`, header)
+          .then((response) => {
+            if (!response.ok) {
+              fetch('https://goalmaster.herokuapp.com/api/users/', {
+                headers: { 'authorization': `bearer ${sessionStorage.getItem('ID Token')}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'},
+              method: "POST",
+              body: JSON.stringify({
+                email: result.user.email,
+                goals: []
+          })}).then((response) => {
+            console.log(response)
+          })
+```
+## Backend Repo and Deployed Site
+- [Backend Repo](https://github.com/mgreen1092/goalmaster-backend.git)
+- [Backend Deployed Link](https://goalmaster.herokuapp.com/api/users)
+## Issues and Resolutions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Issue: When editing a goal, it I needed to find the ID of the selected goal to initiate the appropriate axios call. When I was selecting the goal, it registered the goal, but everything would disappear on the screen based on how the function was set up.
+    - Resolution: I used conditional rendering to say that if a goal is selected, the edit goal modal would appear. This allowed the MainPage to render if a goal was not selected.
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Issue: I needed to set users if they have never signed in to the app before since the goals are associated with users in the database. The google firebase authentication automatically signs them in, whether or not they have previously signed in before. Once the conditional flow was set up, I attempted to do an axios call to determine if a user was already in the database or not. If they weren't in the database, there would be a post axios request. However, the axios request was not returning an error.
+    - Resolution: To resolve this, I used fetch instead of an axios call.
+## Future Plans
+- My database also incorporates a tracker to input how often you are completing your goals and to help measure if you are meeting the goal value users set for themselves. I plan to make an additional page when selecting on the goals you can input a value relating to the goal which will them get stored in the tracker. This data will be shown on a graph to have a better visual representation of users progress.
+- I also would like to incorporate an API with inspirational quotes which appear above the users goals to help keep users motivated to come back and continue working towards their goals. 
