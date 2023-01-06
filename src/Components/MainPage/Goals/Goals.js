@@ -8,7 +8,7 @@ import '../Goals/Goals.css'
 import { TbPencil, TbTrash} from 'react-icons/tb'
 import EditGoal from "../../EditGoal/EditGoal.js";
 
-export default function Goals ({goals, setGoals, selectGoal, selectedGoal, user, setUser, token}) {
+export default function Goals ({goals, setGoals, selectGoal, selectedGoal, setUser, token}) {
     const [addGoalModal, setAddGoalModal] = useState(false)
     const [editGoalModal, setEditGoalModal] = useState(false)
     const [updatedGoal, setUpdatedGoal] = useState({})
