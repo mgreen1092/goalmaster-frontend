@@ -21,7 +21,8 @@
     z-index: 0;
     top: 0;
     margin-top: 90px;
-    overflow-x: hidden;
+    overflow: scroll;
+    /* overflow-x: hidden; */
     padding-top: 20px;
     font-family: 'Mada', sans-serif;
     font-size: 25px;

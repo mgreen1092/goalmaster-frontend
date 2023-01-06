@@ -20,7 +20,6 @@ export default function Goals ({goals, setGoals, selectGoal, selectedGoal, user,
             occurence: '',
         }
     )
-    console.log(token)
     useEffect(() => {
         if(token) {
             getGoals(token)
@@ -48,6 +47,9 @@ export default function Goals ({goals, setGoals, selectGoal, selectedGoal, user,
                     headers: {
                         'Authorization': 'Bearer ' + token
                     }
+                })
+                .then(res => {
+                    setGoals([...goals, res.data])
                 })
         }catch (err) {
             console.log(err);
