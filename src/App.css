@@ -100,13 +100,8 @@ button {
       0 2px 4px rgba(0, 0, 0, .25),
       0 0 0 3px #c8dafc;
 }
-.page {
-  background-image: url('https://www.incimages.com/uploaded_files/image/1920x1080/getty_537586633_360886.jpg');
+
+.image {
   background-size: cover;
-  object-fit: cover;
-  background-repeat:no-repeat;
-  background-position: center top;
-  min-width: 100%;
-  min-height: 100%;
-  padding-top: 700px;
+  width: 100%;
 }

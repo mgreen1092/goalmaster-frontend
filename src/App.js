@@ -86,7 +86,9 @@ function App() {
           <button className='login-with-google-btn' onClick={signInWithGoogle}>Sign in with Google</button>
       </div>
     </div>
-    <div className='page'> hi</div>
+    <div className='page'> 
+        <img alt='SMART Goals' class='image' src="https://www.incimages.com/uploaded_files/image/1920x1080/getty_537586633_360886.jpg" />
+    </div>
     </div>
     )}
     </div>
