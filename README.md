@@ -92,6 +92,7 @@ const signInWithGoogle = () => {
 ## Backend Repo and Deployed Site
 - [Backend Repo](https://github.com/mgreen1092/goalmaster-backend.git)
 - [Backend Deployed Link](https://goalmaster.herokuapp.com/api/users)
+- [Deployed Frontend](https://goalmaster-frontend-21pq3xp4o-mgreen1092.vercel.app/)
 ## Issues and Resolutions
 
 - Issue: When editing a goal, it I needed to find the ID of the selected goal to initiate the appropriate axios call. When I was selecting the goal, it registered the goal, but everything would disappear on the screen based on how the function was set up.
