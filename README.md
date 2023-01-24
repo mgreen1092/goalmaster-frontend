@@ -7,9 +7,9 @@ The best way to accomplish goals is to quantify them and make them as specific a
 
 
 ## Screenshots
-<img width="1024" alt="Light Mode Main Page" src="https://imgur.com/kokSKNz">
-<img width="1024" alt="Light Mode Main Page" src="https://imgur.com/TUrXliT">
-<img width="1024" alt="Light Mode Main Page" src="https://imgur.com/saXLtEl">
+<img width="1024" alt="Light Mode Main Page" src="assets/mainpage.png">
+<img width="1024" alt="Light Mode Main Page" src="assets/googlesignin.png">
+<img width="1024" alt="Light Mode Main Page" src="assets/goalspage.png">
 
 ## Tech Stack
 
