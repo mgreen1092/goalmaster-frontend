@@ -7,11 +7,9 @@ The best way to accomplish goals is to quantify them and make them as specific a
 
 
 ## Screenshots
-
-https://imgur.com/kokSKNz
-https://imgur.com/TUrXliT
-https://imgur.com/saXLtEl
-
+<img width="1024" alt="Light Mode Main Page" src="https://imgur.com/kokSKNz">
+<img width="1024" alt="Light Mode Main Page" src="https://imgur.com/TUrXliT">
+<img width="1024" alt="Light Mode Main Page" src="https://imgur.com/saXLtEl">
 
 ## Tech Stack
 
