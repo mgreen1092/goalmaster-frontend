@@ -93,7 +93,7 @@ const signInWithGoogle = () => {
 - [Deployed Frontend](https://goalmaster-frontend-21pq3xp4o-mgreen1092.vercel.app/)
 ## Issues and Resolutions
 
-- Issue: When editing a goal, it I needed to find the ID of the selected goal to initiate the appropriate axios call. When I was selecting the goal, it registered the goal, but everything would disappear on the screen based on how the function was set up.
+- Issue: When editing a goal, I needed to find the ID of the selected goal to initiate the appropriate axios call. When I was selecting the goal, it registered the goal, but everything would disappear on the screen based on how the function was set up.
     - Resolution: I used conditional rendering to say that if a goal is selected, the edit goal modal would appear. This allowed the MainPage to render if a goal was not selected.
 
 - Issue: I needed to set users if they have never signed in to the app before since the goals are associated with users in the database. The google firebase authentication automatically signs them in, whether or not they have previously signed in before. Once the conditional flow was set up, I attempted to do an axios call to determine if a user was already in the database or not. If they weren't in the database, there would be a post axios request. However, the axios request was not returning an error.
